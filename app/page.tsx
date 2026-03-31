@@ -24,7 +24,7 @@ const steps = [
   {
     number: '01',
     title: 'Consultation',
-    description: 'A deep dive converation where we ask questions, listen, and learn about your business.',
+    description: 'We ask questions, listen, and learn about your business.',
   },
   {
     number: '02',
@@ -34,12 +34,12 @@ const steps = [
   {
     number: '03',
     title: 'Recommendation',
-    description: 'A clear, actionable path forward tailored to your goals and resources.',
+    description: 'We develop a clear, actionable path forward tailored to your goals and resources.',
   },
   {
     number: '04',
     title: 'Results',
-    description: 'We stay engaged to help you execute, measure, and refine as you implement and grow.',
+    description: 'We engage to help you execute, measure, and refine as you implement and grow.',
   },
 ]
 
