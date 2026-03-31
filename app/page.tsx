@@ -1,5 +1,6 @@
 import FadeIn from '@/components/FadeIn'
 import ContactForm from '@/components/ContactForm'
+import Dispersing3DVase from '@/components/Dispersing3DVase'
 
 const tenets = [
   {
@@ -45,8 +46,13 @@ const steps = [
 export default function HomePage() {
   return (
     <>
+      {/* 3D Vase */}
+      <section className="pt-12 pb-4 px-6 flex justify-center">
+        <Dispersing3DVase />
+      </section>
+
       {/* Hero */}
-      <section className="texture-overlay min-h-[85vh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="texture-overlay min-h-[50vh] flex flex-col items-center justify-center px-6 text-center">
         <FadeIn>
           <p className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-charcoal leading-tight mb-6">
             Junto Advisory
