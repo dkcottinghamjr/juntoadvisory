@@ -17,9 +17,12 @@ export default function ContactForm() {
     }
 
     try {
-      const res = await fetch('http://localhost:3001/api/contact', {
+      const res = await fetch('https://formspree.io/f/mlgongvv', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: JSON.stringify(data),
       })
       if (!res.ok) throw new Error('Failed to send')
