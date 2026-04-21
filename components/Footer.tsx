@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <p className="font-display text-xl font-semibold text-charcoal mb-1">
-              Junto Advisory
+              Junto <span className="text-terracotta">Advisory</span>
             </p>
             <p className="text-sm text-charcoal/50">
               Curiosity. Character. Ambition.
@@ -18,7 +18,10 @@ export default function Footer() {
             <Link href="/" className="hover:text-charcoal transition-colors">
               Home
             </Link>
-<Link href="/contact" className="hover:text-charcoal transition-colors">
+            <Link href="/about" className="hover:text-charcoal transition-colors">
+              About
+            </Link>
+            <Link href="/contact" className="hover:text-charcoal transition-colors">
               Contact
             </Link>
           </div>

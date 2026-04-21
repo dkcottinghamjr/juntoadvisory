@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const links = [
   { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ]
 
@@ -18,7 +19,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-sand/60">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="font-display text-2xl font-semibold tracking-wide text-charcoal">
-          Junto Advisory
+          Junto <span className="text-terracotta">Advisory</span>
         </Link>
 
         {/* Desktop links */}

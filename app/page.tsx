@@ -1,6 +1,7 @@
+import Link from 'next/link'
 import FadeIn from '@/components/FadeIn'
 import ContactForm from '@/components/ContactForm'
-import Dispersing3DVase from '@/components/Dispersing3DVase'
+import WheelCube from '@/components/WheelCube'
 
 const tenets = [
   {
@@ -23,39 +24,37 @@ const tenets = [
 const steps = [
   {
     number: '01',
-    title: 'Consultation',
-    description: 'We ask questions, listen, and learn about your business.',
+    title: 'Conversation',
+    description: 'You walk us through your business -- how it runs, what is working, what is not.',
   },
   {
     number: '02',
-    title: 'Evaluation',
-    description: 'We assess the landscape, uncover opportunities, and match solutions.',
+    title: 'Discovery',
+    description: 'You continue running the day to day, we get to work identifying opportunities and matching solutions.',
   },
   {
     number: '03',
     title: 'Recommendation',
-    description: 'We develop a clear, actionable path forward tailored to your goals and resources.',
+    description: 'You receive a clear, actionable roadmap tailored to your goals and resources.',
   },
   {
     number: '04',
-    title: 'Results',
-    description: 'We engage to help you execute, measure, and refine as you implement and grow.',
+    title: 'Implementation',
+    description: 'You have the tools you need and a partner you trust.',
   },
 ]
 
 export default function HomePage() {
   return (
     <>
-      {/* 3D Vase */}
-      <section className="pt-12 pb-4 px-6 flex justify-center">
-        <Dispersing3DVase />
-      </section>
-
       {/* Hero */}
-      <section className="texture-overlay min-h-[50vh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="texture-overlay min-h-[calc(100vh-73px)] flex flex-col items-center justify-center px-6 py-4 text-center">
+        <div className="w-full max-w-[195px] mb-2">
+          <WheelCube />
+        </div>
         <FadeIn>
-          <p className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-charcoal leading-tight mb-6">
-            Junto Advisory
+          <p className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-charcoal leading-tight mb-4">
+            Junto <span className="text-terracotta">Advisory</span>
           </p>
         </FadeIn>
         <FadeIn delay={0.15}>
@@ -66,7 +65,7 @@ export default function HomePage() {
         <FadeIn delay={0.3}>
           <a
             href="#contact"
-            className="mt-4 inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+            className="mt-2 inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
           >
             Inquire
           </a>
@@ -102,6 +101,16 @@ export default function HomePage() {
             something about it.
           </p>
         </FadeIn>
+        <FadeIn delay={0.35}>
+          <div className="mt-8 text-center">
+            <Link
+              href="/about#essay"
+              className="inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+            >
+              The story behind Junto Advisory
+            </Link>
+          </div>
+        </FadeIn>
         <FadeIn delay={0.4}>
           <hr className="w-16 mx-auto border-t border-charcoal/20 mt-10" />
         </FadeIn>
@@ -126,6 +135,16 @@ export default function HomePage() {
             </FadeIn>
           ))}
         </div>
+        <FadeIn delay={0.4}>
+          <div className="mt-16 text-center">
+            <Link
+              href="/about"
+              className="inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+            >
+              Meet our founder
+            </Link>
+          </div>
+        </FadeIn>
       </section>
 
       {/* How it works */}
@@ -164,7 +183,7 @@ export default function HomePage() {
       <section id="contact" className="max-w-2xl mx-auto px-6 py-20 scroll-mt-20">
         <FadeIn>
           <h2 className="font-display text-3xl md:text-4xl font-semibold text-charcoal text-center mb-4">
-            Inquire
+            Let's talk
           </h2>
           <p className="text-charcoal/50 text-center mb-10 text-sm">
             Interested in learning more? Reach out, and we&apos;ll be in touch.

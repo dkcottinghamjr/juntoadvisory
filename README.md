@@ -12,8 +12,8 @@ Strategic advisory website built with **Next.js 14** (App Router), **TypeScript*
 | Language | TypeScript 5 |
 | Styling | Tailwind CSS 3.4 + PostCSS |
 | Animations | Framer Motion 11 |
-| Content | Markdown with YAML frontmatter (gray-matter + remark) |
 | Deployment | GitHub Pages via GitHub Actions |
+| Contact form | Formspree |
 | Fonts | Cormorant Garamond (headings) + DM Sans (body) |
 
 ---
@@ -23,34 +23,27 @@ Strategic advisory website built with **Next.js 14** (App Router), **TypeScript*
 ```
 ├── app/                            # Pages & routes (Next.js App Router)
 │   ├── layout.tsx                  # Root layout (Navbar + Footer, metadata)
-│   ├── globals.css                 # Global styles, Tailwind directives, prose styling
+│   ├── globals.css                 # Global styles, Tailwind directives
 │   ├── page.tsx                    # Home page
-│   ├── contact/
-│   │   └── page.tsx                # Contact page with form
-│   └── insights/
-│       ├── page.tsx                # Blog listing (card grid)
-│       └── [slug]/
-│           └── page.tsx            # Individual blog post (dynamic route)
+│   ├── about/
+│   │   └── page.tsx                # About page (founder, essay, influences)
+│   └── contact/
+│       └── page.tsx                # Contact page with form
 │
 ├── components/                     # Reusable UI components
 │   ├── Navbar.tsx                  # Sticky nav with mobile hamburger menu
 │   ├── Footer.tsx                  # Site footer with links
-│   ├── ContactForm.tsx             # Contact form (posts to external API on port 3001)
+│   ├── ContactForm.tsx             # Contact form (posts to Formspree)
+│   ├── AboutSections.tsx           # Collapsible sections on the About page
+│   ├── WheelCube.jsx               # Animated hero visual
 │   └── FadeIn.tsx                  # Framer Motion fade-in animation wrapper
 │
-├── lib/                            # Utilities
-│   └── posts.ts                    # Markdown post loading & parsing
+├── data/
+│   └── influences.json             # Individuals & content featured on the About page
 │
-├── content/                        # Markdown content (file-based CMS)
-│   └── posts/                      # Blog posts with frontmatter (title, date, excerpt)
-│       ├── navigating-uncertainty-as-a-leader.md
-│       ├── the-compounding-advantage-of-clarity.md
-│       └── when-to-bring-in-outside-perspective.md
-│
-├── public/                         # Static assets
+├── public/                         # Static assets (.nojekyll for GitHub Pages)
 │
 ├── .github/workflows/deploy.yml    # CI/CD: build & deploy to GitHub Pages
-├── CNAME                           # Custom domain config
 ├── next.config.mjs                 # Next.js config (static export, no image optimization)
 ├── tailwind.config.ts              # Theme: colors, fonts, shadows
 ├── tsconfig.json                   # TypeScript config (@ path alias)
@@ -63,12 +56,11 @@ Strategic advisory website built with **Next.js 14** (App Router), **TypeScript*
 
 | Route | File | Description |
 |-------|------|-------------|
-| `/` | `app/page.tsx` | Landing page — hero, tenets (Curiosity/Character/Ambition), how it works, about, CTA |
-| `/insights` | `app/insights/page.tsx` | Blog listing — 2-column card grid of all posts |
-| `/insights/[slug]` | `app/insights/[slug]/page.tsx` | Individual post — rendered markdown with prose styling |
-| `/contact` | `app/contact/page.tsx` | Contact form + social links (LinkedIn, X) |
+| `/` | `app/page.tsx` | Landing page — hero, value proposition, tenets (Curiosity/Character/Ambition), process, contact |
+| `/about` | `app/about/page.tsx` | Founder bio, origin story, and influences — each collapsible. Supports `#founder`, `#essay`, `#influences` hash anchors |
+| `/contact` | `app/contact/page.tsx` | Contact form + social links |
 
-All pages are statically generated at build time. Dynamic routes use `generateStaticParams()`.
+All pages are statically generated at build time.
 
 ---
 
@@ -86,19 +78,9 @@ All pages are statically generated at build time. Dynamic routes use `generateSt
 
 ---
 
-## Content Management
+## Editing Content
 
-Blog posts live in `content/posts/` as Markdown files with YAML frontmatter:
-
-```yaml
----
-title: "Post Title"
-date: "YYYY-MM-DD"
-excerpt: "Short description for the listing page"
----
-```
-
-`lib/posts.ts` provides: `getAllPosts()`, `getAllSlugs()`, `getPostBySlug(slug)`.
+The About page's "Rub elbows with our inspiration" section renders from `data/influences.json`. Edit that file directly to add, remove, or reorder entries, then commit and redeploy.
 
 ---
 
@@ -111,7 +93,7 @@ npm run build        # Static build → /out
 npm run lint         # ESLint
 ```
 
-The contact form submits to `http://localhost:3001/api/contact` — requires a separate backend service.
+The contact form submits directly to Formspree — no backend service required.
 
 ---
 
