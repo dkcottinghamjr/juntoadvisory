@@ -183,7 +183,7 @@ export default function HomePage() {
       <section id="contact" className="max-w-2xl mx-auto px-6 py-20 scroll-mt-20">
         <FadeIn>
           <h2 className="font-display text-3xl md:text-4xl font-semibold text-charcoal text-center mb-4">
-            Let's talk
+            Let&apos;s talk
           </h2>
           <p className="text-charcoal/50 text-center mb-10 text-sm">
             Interested in learning more? Reach out, and we&apos;ll be in touch.
