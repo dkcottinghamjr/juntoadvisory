@@ -19,10 +19,37 @@ const dmSans = DM_Sans({
   display: 'swap',
 })
 
+const siteUrl = 'https://junto-advisory.com'
+const siteTitle = 'Junto Advisory'
+const siteDescription =
+  'The application of curiosity, character, and ambition.'
+
 export const metadata: Metadata = {
-  title: { default: 'Junto Advisory', template: '%s | Junto Advisory' },
-  description:
-    'Strategic advisory at the intersection of technology, business, and human insight. Junto Advisory partners with ambitious leaders to navigate complexity and unlock growth.',
+  metadataBase: new URL(siteUrl),
+  title: { default: siteTitle, template: '%s | Junto Advisory' },
+  description: siteDescription,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: siteUrl,
+    siteName: siteTitle,
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Junto Advisory',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteTitle,
+    description: siteDescription,
+    images: ['/og-image.jpg'],
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
