@@ -20,9 +20,9 @@ const dmSans = DM_Sans({
 })
 
 const siteUrl = 'https://junto-advisory.com'
-const siteTitle = 'Junto Advisory'
+const siteTitle = 'The application of curiosity, character, and ambition.'
 const siteDescription =
-  'The application of curiosity, character, and ambition.'
+  'We architect your AI future.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
