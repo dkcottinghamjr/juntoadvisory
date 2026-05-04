@@ -24,23 +24,18 @@ const tenets = [
 const steps = [
   {
     number: '01',
-    title: 'Conversation',
+    title: 'Discovery',
     description: 'You walk us through your business -- how it runs, what is working, what is not.',
   },
   {
     number: '02',
-    title: 'Discovery',
+    title: 'Synthesis',
     description: 'You continue running the day to day, we get to work identifying opportunities and matching solutions.',
   },
   {
     number: '03',
-    title: 'Recommendation',
-    description: 'You receive a clear, actionable roadmap tailored to your goals and resources.',
-  },
-  {
-    number: '04',
-    title: 'Implementation',
-    description: 'You have the tools you need and a partner you trust.',
+    title: 'Delivery',
+    description: 'You receive a clear, actionable blueprint tailored to your goals and resources.',
   },
 ]
 
@@ -61,14 +56,6 @@ export default function HomePage() {
           <p className="text-lg md:text-xl text-charcoal/50 max-w-xl mb-4 leading-relaxed font-light">
             The application of curiosity, character, and ambition.
           </p>
-        </FadeIn>
-        <FadeIn delay={0.3}>
-          <a
-            href="#contact"
-            className="mt-2 inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
-          >
-            Inquire
-          </a>
         </FadeIn>
       </section>
 
@@ -157,7 +144,7 @@ export default function HomePage() {
             Our process
           </h2>
         </FadeIn>
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {steps.map((step, i) => (
             <FadeIn key={step.title} delay={i * 0.1}>
               <div className="text-center">
@@ -174,6 +161,16 @@ export default function HomePage() {
             </FadeIn>
           ))}
         </div>
+        <FadeIn delay={0.4}>
+          <div className="mt-16 text-center">
+            <Link
+              href="/services"
+              className="inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+            >
+              Learn more
+            </Link>
+          </div>
+        </FadeIn>
         <FadeIn>
           <hr className="w-16 mx-auto border-t border-charcoal/20 mt-16" />
         </FadeIn>

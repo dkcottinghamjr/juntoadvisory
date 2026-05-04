@@ -103,7 +103,7 @@ export default function ServicesPage() {
               href="/contact"
               className="inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
             >
-              Book a discovery call
+              Inquire
             </Link>
           </div>
         </FadeIn>
