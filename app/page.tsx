@@ -40,7 +40,7 @@ const steps = [
   {
     number: '04',
     title: 'Guidance',
-    description: 'You execute with us by your side, navigating the evolving business and technology environment.',
+    description: 'You execute with us by your side, adapting the plan as your business and the technology evolve.',
   },
 ]
 
