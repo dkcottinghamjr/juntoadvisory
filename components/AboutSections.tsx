@@ -139,7 +139,7 @@ export default function AboutSections() {
                       {section.id === 'founder' && (
                         <>
                           <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
-                            Daniel has spent his career in and around small business &mdash; as a real estate broker, a CEO, and now as an advisor helping small businesses put AI to work.
+                            Daniel has spent his career in and around business ownership and leadership — as a real estate broker, a CEO, and now as the founder of Junto Advisory, helping businesses put AI to work.
                           </p>
                           <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
                             After graduating from the University of North Carolina, where he studied business as a Morehead-Cain Scholar, Daniel joined the family business, Cottingham-Chalk. He spent 11 years serving buyers and sellers before transitioning into leadership, where he led the business and its 100+ agent sales team for the next decade.
@@ -169,13 +169,16 @@ export default function AboutSections() {
                             2009
                           </h3>
                           <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
-                            Right out of college I played a lot of basketball. Early mornings at the Y, afternoons at the park, evenings at church gyms around town. The games were fun, and they came with a bonus &mdash; the more pickup I played, the more clients and referrals I picked up.
+                            I remember sitting down at my desk that day with a new energy, like I was getting into the cockpit of a race car. The feeling was foreign. It had been several months since the financial crisis had taken hold and years since the housing market peaked, and it was very clear that the road to recovery was going to be long and slow for those of us in the residential real estate business.
                           </p>
                           <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
-                            Then something happened. I got busy. More business meant less basketball, and less time on the hardwood meant fewer clients in the pipeline. There were software products available and assistants for hire, either of which would have saved time, but as a commission based agent in the middle of the GFC, I couldn&rsquo;t pull the trigger.
+                            As a newlywed relying solely on commission income, it was a scary time. The fact that the entire world was pointing at our industry as the catalyst for the crisis didn&rsquo;t make it easier. How had we missed this?
+                          </p>
+                          <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
+                            I opened my computer and reflected on the sleepless night that had birthed this renewed focus. I didn&rsquo;t want to be this wrong again &mdash; to miss something this important. So I resolved to build my own understanding of the real estate market, and of the world for that matter, from the ground up. I stripped everything down as far as I could &mdash; to the basic building blocks, the behaviors and conditions that made up the market. The exercise was invigorating, and the work proved invaluable, for me and for our company.
                           </p>
                           <p className="text-charcoal/70 leading-relaxed text-lg mb-8">
-                            It took years to recognize the mistake &mdash; that the pennies I had pinched had choked my golden goose &mdash; or maybe it wasn&rsquo;t a mistake at all. Maybe it was just recognizing a problem &mdash; that effective solutions are too expensive. Either way, I filed it away as a lesson learned.
+                            I didn&rsquo;t realize it at the time, but this was my first encounter with first-principles thinking. Over the years, the process became second nature. Patterns started to emerge. And what had begun as a simple, almost defensive exercise started to feel like something closer to a superpower.
                           </p>
 
                           <h3 className="font-display text-xl font-semibold text-terracotta mb-3">
@@ -198,16 +201,16 @@ export default function AboutSections() {
                             Around this time, we began the process to sell the family business that I had been operating for two decades. It was the right decision, and as I considered my next chapter, the timing could not have been better. The AI revolution was reaching fever pitch, and for the first time in my adult life, I had the freedom to follow my curiosity wherever it led.
                           </p>
                           <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
-                            So I did. I spent my time researching career opportunities, brainstorming business ideas, designing products, building applications, all with the latest AI tools by my side. What surprised me was how intuitive it felt. Less like learning a new tool and more like finally having the right one. The more I built, the more I saw. The more I saw, the more I talked about it.
+                            So I did. I spent my time brainstorming, building, and researching, all with the latest AI tools by my side. What surprised me was how intuitive it felt. The fundamentals were familiar, I&rsquo;d used these building blocks before. The more I built, the more I saw. Patterns began to emerge, and I started to talk about it.
                           </p>
                           <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
                             Before long, friends and colleagues were asking for help with AI in their lives and businesses. I started saying yes.
                           </p>
                           <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
-                            That&rsquo;s when it clicked. Junto Advisory was born, not from a business plan, but from real business experience.
+                            That&rsquo;s when it clicked. Junto Advisory was born, not from a business plan, but from real business experience and a longtime habit of first-principles thinking.
                           </p>
                           <p className="text-charcoal/70 leading-relaxed text-lg">
-                            Three moments across forty years help tell the story of Junto Advisory. My childhood inspiration from a curious inventor. A career frustrated by the cost of tradeoffs. Then clarity, sitting in Omaha with an ice cream bar and the dawning sense that everything I had been collecting was about to be useful.
+                            Three moments across forty years help tell the story of Junto Advisory. My childhood inspiration from a curious inventor. The coming of age realization that the experts are human too. Then clarity, sitting in Omaha with an ice cream bar and the dawning sense that everything I had been collecting was about to be useful.
                           </p>
                         </>
                       )}
