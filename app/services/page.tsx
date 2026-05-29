@@ -96,7 +96,7 @@ export default function ServicesPage() {
               Timeline and investment
             </h2>
             <p className="text-charcoal/70 leading-relaxed text-lg">
-              Once we decide to engage, blueprint development typically takes one to three weeks, depending on your organization's size and complexity. The blueprint is a $50,000 investment. Ongoing advisory — where we guide implementation and keep your plan current — is billed monthly at $5,000. Implementation partners are available for execution work, at an additional fee.
+              Once we decide to engage, blueprint development typically takes one to three weeks, depending on your organization&rsquo;s size and complexity. The blueprint is a $50,000 investment. Ongoing advisory — where we guide implementation and keep your plan current — is billed monthly at $5,000. Implementation partners are available for execution work, at an additional fee.
             </p>
           </div>
         </FadeIn>
