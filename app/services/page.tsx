@@ -18,7 +18,7 @@ const phases = [
     ],
   },
   {
-    title: 'Advisory',
+    title: 'Guidance',
     subtitle: 'Ongoing work to support your business',
     paragraphs: [
       { lead: null, body: 'Like any good architect, we stay engaged beyond the blueprint as you bring the plan to life.' },

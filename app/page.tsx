@@ -37,6 +37,11 @@ const steps = [
     title: 'Delivery',
     description: 'You receive a clear, actionable blueprint tailored to your goals and resources.',
   },
+  {
+    number: '04',
+    title: 'Guidance',
+    description: 'You execute with us by your side, navigating the evolving business and technology environment.',
+  },
 ]
 
 export default function HomePage() {
@@ -66,8 +71,7 @@ export default function HomePage() {
         </FadeIn>
         <FadeIn>
           <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
-            Every small business owner knows the feeling. You can see exactly what your business
-            needs — but the solution is expensive or comes in a box that was built for someone else.
+            Every business owner knows the feeling. You can see the opportunity, but it’s just out of reach — the solutions are opaque or come in a box that was built for someone else.
           </p>
         </FadeIn>
         <FadeIn delay={0.1}>
@@ -77,15 +81,12 @@ export default function HomePage() {
         </FadeIn>
         <FadeIn delay={0.2}>
           <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
-            Leveraging decades of operational experience with AI expertise, we make bespoke strategy
-            attainable for small businesses. We learn how your business operates, uncover
-            opportunities, and deliver a roadmap with measurable outcomes.
+            We pair two decades of running and ultimately selling a business with deep AI expertise to deliver executable strategy that actually improves your business. We learn how your business operates to uncover opportunities, design a blueprint, and guide you through implementation.
           </p>
         </FadeIn>
         <FadeIn delay={0.3}>
           <p className="text-charcoal/70 leading-relaxed text-lg">
-            Junto Advisory is a partner who has lived your challenge and finally has the tools to do
-            something about it.
+            Junto Advisory is a partner who has lived your challenge and understands the evolving road ahead.
           </p>
         </FadeIn>
         <FadeIn delay={0.35}>
@@ -144,7 +145,7 @@ export default function HomePage() {
             Our process
           </h2>
         </FadeIn>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, i) => (
             <FadeIn key={step.title} delay={i * 0.1}>
               <div className="text-center">
