@@ -70,12 +70,10 @@ export default function ServicesPage() {
             <div className="space-y-12">
               {phases.map((phase) => (
                 <div key={phase.title}>
-                  <h3 className="text-xl font-semibold text-terracotta mb-1">
+                  <h3 className="font-display text-xl font-semibold text-terracotta mb-4">
                     {phase.title}
+                    <span className="font-normal text-charcoal/50">{` — ${phase.subtitle}`}</span>
                   </h3>
-                  <p className="text-charcoal/50 text-base mb-5">
-                    {phase.subtitle}
-                  </p>
                   <div className="space-y-4">
                     {phase.paragraphs.map((para, i) => (
                       <p key={i} className="text-charcoal/70 leading-relaxed text-lg">
