@@ -155,7 +155,7 @@ export default function AboutSections() {
                       {section.id === 'essay' && (
                         <>
                           <p className="text-charcoal/70 leading-relaxed text-lg mb-8">
-                            What do Thomas Edison, pickup basketball, and a Dairy Queen Dilly Bar have in common? More than you might think. Here&rsquo;s the story of how Junto Advisory came to be, straight from our founder&hellip;
+                            What do Thomas Edison, race cars, and a Dairy Queen Dilly Bar have in common? More than you might think. Here&rsquo;s the story of how Junto Advisory came to be, straight from our founder&hellip;
                           </p>
 
                           <h3 className="font-display text-xl font-semibold text-terracotta mb-3">
