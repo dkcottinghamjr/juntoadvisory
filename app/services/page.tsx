@@ -12,7 +12,7 @@ const phases = [
     title: 'Blueprint',
     subtitle: 'A plan designed specifically for your business',
     paragraphs: [
-      { lead: 'Discovery', body: 'We collect the information that makes the rest possible. Through structured conversation and data review, we capture your story: your team, your operations, your market, your goals. This phase is efficient by design, typically a matter of hours, not days. The goal is an input rooted in reality.' },
+      { lead: 'Discovery', body: 'We collect the information that makes the rest possible. Through structured conversation and data review, we capture your story: your team, your operations, your market, your goals. This phase is efficient by design. The goal is an input rooted in reality.' },
       { lead: 'Synthesis', body: 'This is where it comes together. Your information seeds a proprietary multi-stage analytical process that identifies opportunities, surfaces AI-first solutions, and pressure tests each against your business for feasibility and impact. Then we design a blueprint specifically for your business with a clear roadmap for implementation.' },
       { lead: 'Delivery', body: 'We present the blueprint to your leadership team in a working session: opportunities identified, solutions prescribed, roadmap sequenced. You leave with a plan you can act on immediately.' },
     ],
