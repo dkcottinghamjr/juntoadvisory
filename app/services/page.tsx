@@ -91,10 +91,10 @@ export default function ServicesPage() {
         <FadeIn delay={0.3}>
           <div className="border-b border-charcoal/15 py-8">
             <h2 className="font-display text-2xl md:text-3xl font-semibold text-charcoal mb-6">
-              Timeline and investment
+              Timeline
             </h2>
             <p className="text-charcoal/70 leading-relaxed text-lg">
-              Once we decide to engage, blueprint development typically takes one to three weeks, depending on your organization&rsquo;s size and complexity. The blueprint is a $50,000 investment. Ongoing advisory — where we guide implementation and keep your plan current — is billed monthly at $5,000. Implementation partners are available for execution work, at an additional fee.
+              Once we decide to engage, blueprint development typically takes one to three weeks, depending on your organization&rsquo;s size and complexity. Then we move to ongoing advisory, where we guide implementation and keep your plan current. Implementation partners are available for execution work, at an additional fee.
             </p>
           </div>
         </FadeIn>
