@@ -8,12 +8,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream:      '#faf8f5',
+        cream:      '#f4eddd',
         charcoal:   '#2c2c2c',
-        terracotta: { DEFAULT: '#c2714f', light: '#d4896a', dark: '#a85d3f' },
+        terracotta: { DEFAULT: '#b85c29', light: '#d17845', dark: '#94481d' },
         olive:      { DEFAULT: '#6b7c4e', light: '#8a9a6d', dark: '#556340' },
         ochre:      { DEFAULT: '#c49a3c', light: '#d4b060', dark: '#a8832e' },
-        sand:       '#e8e0d0',
+        sand:       '#e5d8bd',
       },
       fontFamily: {
         display: ['var(--font-cormorant)', 'Georgia', 'serif'],
