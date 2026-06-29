@@ -12,6 +12,8 @@ export default function WheelCube() {
     if (!canvas || !stage) return
 
     const ctx = canvas.getContext('2d', { alpha: true })
+    const LINE_WIDTH = 2.5
+    const NODE_RADIUS = LINE_WIDTH / 2
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     let DPR = 1
@@ -23,7 +25,7 @@ export default function WheelCube() {
       ctx.lineJoin = 'round'
       ctx.strokeStyle = '#141414'
       ctx.fillStyle = '#141414'
-      ctx.lineWidth = 1.5
+      ctx.lineWidth = LINE_WIDTH
     }
 
     function resize() {
@@ -289,8 +291,8 @@ export default function WheelCube() {
       ctx.beginPath()
       for (let i = 0; i < 8; i++) {
         const x = PX[i], y = PY[i]
-        ctx.moveTo(x + 5, y)
-        ctx.arc(x, y, 5, 0, TWO_PI)
+        ctx.moveTo(x + NODE_RADIUS, y)
+        ctx.arc(x, y, NODE_RADIUS, 0, TWO_PI)
       }
       ctx.fill()
     }
