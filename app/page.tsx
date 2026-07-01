@@ -53,12 +53,12 @@ export default function HomePage() {
           <WheelCube />
         </div>
         <FadeIn>
-          <p className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-charcoal leading-tight mb-4">
-            Junto <span className="text-terracotta">Advisory</span>
+          <p className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-ink leading-tight mb-4">
+            Junto <span className="text-primary">Advisory</span>
           </p>
         </FadeIn>
         <FadeIn delay={0.15}>
-          <p className="text-lg md:text-xl text-charcoal/50 max-w-xl mb-4 leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-ink/50 max-w-xl mb-4 leading-relaxed font-light">
             The application of curiosity, character, and ambition.
           </p>
         </FadeIn>
@@ -67,25 +67,25 @@ export default function HomePage() {
       {/* Value proposition */}
       <section className="max-w-3xl mx-auto px-6 py-20">
         <FadeIn>
-          <hr className="w-16 mx-auto border-t border-charcoal/20 mb-10" />
+          <hr className="w-16 mx-auto border-t border-ink/20 mb-10" />
         </FadeIn>
         <FadeIn>
-          <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
+          <p className="text-ink/70 leading-relaxed text-lg mb-6">
             Every business owner knows the feeling. You can see the opportunity, but it’s just out of reach — the solutions are opaque or come in a box that was built for someone else.
           </p>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <p className="text-charcoal font-display text-2xl font-semibold mb-6">
+          <p className="text-ink font-display text-2xl font-semibold mb-6">
             We built Junto Advisory to solve this problem.
           </p>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <p className="text-charcoal/70 leading-relaxed text-lg mb-6">
+          <p className="text-ink/70 leading-relaxed text-lg mb-6">
             We pair two decades of running and ultimately selling a business with deep AI expertise to deliver executable strategy that actually improves your business. We learn how your business operates to uncover opportunities, design a blueprint, and guide you through implementation.
           </p>
         </FadeIn>
         <FadeIn delay={0.3}>
-          <p className="text-charcoal/70 leading-relaxed text-lg">
+          <p className="text-ink/70 leading-relaxed text-lg">
             Junto Advisory is a partner who has lived your challenge and understands the evolving road ahead.
           </p>
         </FadeIn>
@@ -93,14 +93,14 @@ export default function HomePage() {
           <div className="mt-8 text-center">
             <Link
               href="/about#essay"
-              className="inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+              className="inline-block border border-ink/20 text-ink/60 hover:text-ink hover:border-ink/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
             >
               The story behind Junto Advisory
             </Link>
           </div>
         </FadeIn>
         <FadeIn delay={0.4}>
-          <hr className="w-16 mx-auto border-t border-charcoal/20 mt-10" />
+          <hr className="w-16 mx-auto border-t border-ink/20 mt-10" />
         </FadeIn>
       </section>
 
@@ -110,13 +110,13 @@ export default function HomePage() {
           {tenets.map((tenet, i) => (
             <FadeIn key={tenet.title} delay={i * 0.1}>
               <div className="bg-white/60 rounded-xl p-8 shadow-card hover:shadow-card-hover transition-shadow">
-                <h3 className="font-display text-2xl font-semibold text-charcoal mb-3">
+                <h3 className="font-display text-2xl font-semibold text-ink mb-3">
                   {tenet.title}
                 </h3>
-                <p className="text-charcoal/60 leading-relaxed text-sm italic">
+                <p className="text-ink/60 leading-relaxed text-sm italic">
                   {tenet.quote}
                 </p>
-                <p className="text-charcoal/40 text-xs mt-3">
+                <p className="text-ink/40 text-xs mt-3">
                   {tenet.attribution}
                 </p>
               </div>
@@ -127,7 +127,7 @@ export default function HomePage() {
           <div className="mt-16 text-center">
             <Link
               href="/about"
-              className="inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+              className="inline-block border border-ink/20 text-ink/60 hover:text-ink hover:border-ink/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
             >
               Meet our founder
             </Link>
@@ -138,10 +138,10 @@ export default function HomePage() {
       {/* How it works */}
       <section className="max-w-6xl mx-auto px-6 py-20">
         <FadeIn>
-          <hr className="w-16 mx-auto border-t border-charcoal/20 mb-16" />
+          <hr className="w-16 mx-auto border-t border-ink/20 mb-16" />
         </FadeIn>
         <FadeIn>
-          <h2 className="font-display text-3xl md:text-4xl font-semibold text-charcoal text-center mb-16">
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-ink text-center mb-16">
             Our process
           </h2>
         </FadeIn>
@@ -149,13 +149,13 @@ export default function HomePage() {
           {steps.map((step, i) => (
             <FadeIn key={step.title} delay={i * 0.1}>
               <div className="text-center">
-                <p className="text-xs uppercase tracking-widest text-terracotta font-semibold mb-3">
+                <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-3">
                   {step.number}
                 </p>
-                <h3 className="font-display text-xl font-semibold text-charcoal mb-3">
+                <h3 className="font-display text-xl font-semibold text-ink mb-3">
                   {step.title}
                 </h3>
-                <p className="text-charcoal/60 leading-relaxed text-sm">
+                <p className="text-ink/60 leading-relaxed text-sm">
                   {step.description}
                 </p>
               </div>
@@ -166,24 +166,24 @@ export default function HomePage() {
           <div className="mt-16 text-center">
             <Link
               href="/services"
-              className="inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+              className="inline-block border border-ink/20 text-ink/60 hover:text-ink hover:border-ink/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
             >
               Learn more
             </Link>
           </div>
         </FadeIn>
         <FadeIn>
-          <hr className="w-16 mx-auto border-t border-charcoal/20 mt-16" />
+          <hr className="w-16 mx-auto border-t border-ink/20 mt-16" />
         </FadeIn>
       </section>
 
       {/* CTA — Let's talk */}
       <section id="contact" className="max-w-2xl mx-auto px-6 py-20 scroll-mt-20">
         <FadeIn>
-          <h2 className="font-display text-3xl md:text-4xl font-semibold text-charcoal text-center mb-4">
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-ink text-center mb-4">
             Let&apos;s talk
           </h2>
-          <p className="text-charcoal/50 text-center mb-10 text-sm">
+          <p className="text-ink/50 text-center mb-10 text-sm">
             Interested in learning more? Reach out, and we&apos;ll be in touch.
           </p>
         </FadeIn>

@@ -21,10 +21,13 @@ export default function WheelCube() {
     let H = 0
 
     function applyStyles() {
+      const color = getComputedStyle(document.documentElement)
+        .getPropertyValue('--color-primary')
+        .trim() || '#1f6e73'
       ctx.lineCap = 'round'
       ctx.lineJoin = 'round'
-      ctx.strokeStyle = '#141414'
-      ctx.fillStyle = '#141414'
+      ctx.strokeStyle = color
+      ctx.fillStyle = color
       ctx.lineWidth = LINE_WIDTH
     }
 

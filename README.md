@@ -67,12 +67,12 @@ All pages are statically generated at build time.
 ## Design System
 
 **Color Palette:**
-- `cream` (#faf8f5) — background
-- `charcoal` (#2c2c2c) — primary text
-- `terracotta` (#c2714f) — accent, CTAs, links
-- `olive` (#6b7c4e) — secondary accent
-- `ochre` (#c49a3c) — tertiary accent
-- `sand` (#e8e0d0) — borders, subtle backgrounds
+- `canvas` (#f2f5f3) — background
+- `ink` (#17272e) — primary text
+- `primary` (#1f6e73) — accent, CTAs, links
+- `secondary` (#5b6e63) — supporting accent
+- `highlight` (#b58a4b) — small warmth note
+- `border` (#d7e0dc) — borders, subtle backgrounds
 
 **Typography:** Cormorant Garamond for display headings, DM Sans for body text.
 

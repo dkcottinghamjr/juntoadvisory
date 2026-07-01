@@ -55,7 +55,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
-      <body className="font-sans antialiased bg-cream text-charcoal min-h-screen flex flex-col">
+      <body className="font-sans antialiased bg-canvas text-ink min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

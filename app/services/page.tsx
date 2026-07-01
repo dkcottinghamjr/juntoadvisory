@@ -31,52 +31,52 @@ export default function ServicesPage() {
   return (
     <section className="max-w-3xl mx-auto px-6 py-20">
       <FadeIn>
-        <p className="text-xs uppercase tracking-widest text-terracotta font-semibold mb-10">
+        <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-10">
           Services
         </p>
       </FadeIn>
 
-      <div className="border-t border-charcoal/15">
+      <div className="border-t border-ink/15">
         <FadeIn>
-          <div className="border-b border-charcoal/15 py-8">
-            <h2 className="font-display text-2xl md:text-3xl font-semibold text-charcoal mb-6">
+          <div className="border-b border-ink/15 py-8">
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-ink mb-6">
               What we do
             </h2>
-            <p className="text-charcoal/70 leading-relaxed text-lg">
+            <p className="text-ink/70 leading-relaxed text-lg">
               Fundamentally, we are architects. We help businesses identify their highest-leverage opportunities to put AI to work, we design a detailed blueprint focused on execution, and we help navigate implementation as both the business and the technology evolve.
             </p>
           </div>
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="border-b border-charcoal/15 py-8">
-            <h2 className="font-display text-2xl md:text-3xl font-semibold text-charcoal mb-6">
+          <div className="border-b border-ink/15 py-8">
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-ink mb-6">
               Our clients
             </h2>
-            <p className="text-charcoal/70 leading-relaxed text-lg">
+            <p className="text-ink/70 leading-relaxed text-lg">
               The businesses we work with vary widely in industry and stage. What they share is a value-based culture and a growth mindset. They have a centralized knowledge base — an individual or small leadership team that can fit around a table — and they are serious about leveraging AI proactively.
             </p>
           </div>
         </FadeIn>
 
         <FadeIn delay={0.2}>
-          <div className="border-b border-charcoal/15 py-8">
-            <h2 className="font-display text-2xl md:text-3xl font-semibold text-charcoal mb-6">
+          <div className="border-b border-ink/15 py-8">
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-ink mb-6">
               How we work
             </h2>
-            <p className="text-charcoal/70 leading-relaxed text-lg mb-8">
+            <p className="text-ink/70 leading-relaxed text-lg mb-8">
               Your engagement unfolds in two phases: blueprint design and ongoing advisory.
             </p>
             <div className="space-y-12">
               {phases.map((phase) => (
                 <div key={phase.title}>
-                  <h3 className="font-display text-xl font-semibold text-terracotta mb-4">
+                  <h3 className="font-display text-xl font-semibold text-primary mb-4">
                     {phase.title}
-                    <span className="font-normal text-charcoal/50">{` — ${phase.subtitle}`}</span>
+                    <span className="font-normal text-ink/50">{` — ${phase.subtitle}`}</span>
                   </h3>
                   <div className="space-y-4">
                     {phase.paragraphs.map((para, i) => (
-                      <p key={i} className="text-charcoal/70 leading-relaxed text-lg">
+                      <p key={i} className="text-ink/70 leading-relaxed text-lg">
                         {para.lead && `${para.lead} — `}
                         {para.body}
                       </p>
@@ -89,28 +89,28 @@ export default function ServicesPage() {
         </FadeIn>
 
         <FadeIn delay={0.3}>
-          <div className="border-b border-charcoal/15 py-8">
-            <h2 className="font-display text-2xl md:text-3xl font-semibold text-charcoal mb-6">
+          <div className="border-b border-ink/15 py-8">
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-ink mb-6">
               Timeline
             </h2>
-            <p className="text-charcoal/70 leading-relaxed text-lg">
+            <p className="text-ink/70 leading-relaxed text-lg">
               Once we decide to engage, blueprint development typically takes one to three weeks, depending on your organization&rsquo;s size and complexity. Then we move to ongoing advisory, where we guide implementation and keep your plan current. Implementation partners are available for execution work, at an additional fee.
             </p>
           </div>
         </FadeIn>
 
         <FadeIn delay={0.4}>
-          <div className="border-b border-charcoal/15 py-8">
-            <h2 className="font-display text-2xl md:text-3xl font-semibold text-charcoal mb-6">
+          <div className="border-b border-ink/15 py-8">
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-ink mb-6">
               What comes next
             </h2>
-            <p className="text-charcoal/70 leading-relaxed text-lg mb-8">
+            <p className="text-ink/70 leading-relaxed text-lg mb-8">
               Interested? Let&rsquo;s get together to explore whether your business and Junto Advisory are the right match. If it makes sense to work together, we&rsquo;ll go from there.
             </p>
             <div className="text-center">
               <Link
                 href="/contact"
-                className="inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+                className="inline-block border border-ink/20 text-ink/60 hover:text-ink hover:border-ink/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
               >
                 Inquire
               </Link>
@@ -121,19 +121,19 @@ export default function ServicesPage() {
 
       <FadeIn delay={0.5}>
         <div className="mt-16 text-center">
-          <h2 className="font-display text-2xl md:text-3xl font-semibold text-charcoal mb-8">
+          <h2 className="font-display text-2xl md:text-3xl font-semibold text-ink mb-8">
             Learn more about Junto Advisory
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/about#founder"
-              className="inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+              className="inline-block border border-ink/20 text-ink/60 hover:text-ink hover:border-ink/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
             >
               Meet our founder
             </Link>
             <Link
               href="/about#essay"
-              className="inline-block border border-charcoal/20 text-charcoal/60 hover:text-charcoal hover:border-charcoal/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+              className="inline-block border border-ink/20 text-ink/60 hover:text-ink hover:border-ink/40 text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
             >
               Read our story
             </Link>

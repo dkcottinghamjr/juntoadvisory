@@ -17,10 +17,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-sand/60">
+    <nav className="sticky top-0 z-50 bg-canvas/90 backdrop-blur-md border-b border-border/60">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="font-display text-2xl font-semibold tracking-wide text-charcoal">
-          Junto <span className="text-terracotta">Advisory</span>
+        <Link href="/" className="font-display text-2xl font-semibold tracking-wide text-ink">
+          Junto <span className="text-primary">Advisory</span>
         </Link>
 
         {/* Desktop links */}
@@ -31,8 +31,8 @@ export default function Navbar() {
               href={link.href}
               className={`text-sm font-medium transition-colors ${
                 pathname === link.href
-                  ? 'text-terracotta'
-                  : 'text-charcoal/60 hover:text-charcoal'
+                  ? 'text-primary'
+                  : 'text-ink/60 hover:text-ink'
               }`}
             >
               {link.label}
@@ -47,17 +47,17 @@ export default function Navbar() {
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-5 h-0.5 bg-charcoal transition-transform ${
+            className={`block w-5 h-0.5 bg-ink transition-transform ${
               open ? 'rotate-45 translate-y-2' : ''
             }`}
           />
           <span
-            className={`block w-5 h-0.5 bg-charcoal transition-opacity ${
+            className={`block w-5 h-0.5 bg-ink transition-opacity ${
               open ? 'opacity-0' : ''
             }`}
           />
           <span
-            className={`block w-5 h-0.5 bg-charcoal transition-transform ${
+            className={`block w-5 h-0.5 bg-ink transition-transform ${
               open ? '-rotate-45 -translate-y-2' : ''
             }`}
           />
@@ -72,7 +72,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden overflow-hidden border-t border-sand/60 bg-cream"
+            className="md:hidden overflow-hidden border-t border-border/60 bg-canvas"
           >
             <div className="px-6 py-4 flex flex-col gap-3">
               {links.map((link) => (
@@ -82,8 +82,8 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className={`text-base font-medium py-1 ${
                     pathname === link.href
-                      ? 'text-terracotta'
-                      : 'text-charcoal/60 hover:text-charcoal'
+                      ? 'text-primary'
+                      : 'text-ink/60 hover:text-ink'
                   }`}
                 >
                   {link.label}

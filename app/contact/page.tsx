@@ -32,13 +32,13 @@ export default function ContactPage() {
   return (
     <section className="max-w-3xl mx-auto px-6 py-20">
       <FadeIn>
-        <p className="text-xs uppercase tracking-widest text-terracotta font-semibold mb-4">
+        <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-4">
           Contact
         </p>
-        <h1 className="font-display text-4xl md:text-5xl font-semibold text-charcoal mb-4 leading-tight">
+        <h1 className="font-display text-4xl md:text-5xl font-semibold text-ink mb-4 leading-tight">
           Let&apos;s talk
         </h1>
-        <p className="text-charcoal/50 text-lg max-w-lg mb-12 leading-relaxed">
+        <p className="text-ink/50 text-lg max-w-lg mb-12 leading-relaxed">
           Whether you&apos;re navigating a critical decision, exploring a
           partnership, or simply want to exchange ideas &mdash; we&apos;re interested.
         </p>
@@ -46,7 +46,7 @@ export default function ContactPage() {
 
       <FadeIn delay={0.15}>
         <div className="bg-white/60 rounded-xl p-8 md:p-10 shadow-card mb-10">
-          <h2 className="font-display text-2xl font-semibold text-charcoal mb-6">
+          <h2 className="font-display text-2xl font-semibold text-ink mb-6">
             Send us a message
           </h2>
           <ContactForm />
@@ -55,7 +55,7 @@ export default function ContactPage() {
 
       <FadeIn delay={0.25}>
         <div className="bg-white/60 rounded-xl p-8 md:p-10 shadow-card">
-          <h2 className="font-display text-2xl font-semibold text-charcoal mb-6">
+          <h2 className="font-display text-2xl font-semibold text-ink mb-6">
             Find us elsewhere
           </h2>
           <div className="flex gap-5">
@@ -65,7 +65,7 @@ export default function ContactPage() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-charcoal/50 hover:text-terracotta transition-colors"
+                className="flex items-center gap-2 text-ink/50 hover:text-primary transition-colors"
                 aria-label={social.name}
               >
                 {social.icon}

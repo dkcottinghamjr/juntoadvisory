@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Junto Advisory — Color Palette Mockups</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: #121618;
+        color: #17272e;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page-shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0 56px;
+      }
+
+      .intro {
+        margin-bottom: 28px;
+        padding: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 28px;
+        background:
+          radial-gradient(circle at top left, rgba(31, 110, 115, 0.26), transparent 34rem),
+          linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+        color: #f8faf8;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: rgba(248, 250, 248, 0.7);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .intro h1 {
+        max-width: 820px;
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.4rem, 6vw, 5.6rem);
+        font-weight: 400;
+        letter-spacing: -0.055em;
+        line-height: 0.92;
+      }
+
+      .intro p {
+        max-width: 690px;
+        margin: 18px 0 0;
+        color: rgba(248, 250, 248, 0.78);
+        font-size: 1.04rem;
+      }
+
+      .quick-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .quick-links a {
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        padding: 9px 14px;
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(248, 250, 248, 0.86);
+        font-size: 0.9rem;
+        text-decoration: none;
+      }
+
+      .mockup {
+        --canvas: #f2f5f3;
+        --ink: #17272e;
+        --primary: #1f6e73;
+        --secondary: #5b6e63;
+        --highlight: #b58a4b;
+        --border: #d7e0dc;
+        --panel: rgba(255, 255, 255, 0.64);
+
+        overflow: hidden;
+        margin-top: 22px;
+        border-radius: 30px;
+        background: var(--canvas);
+        color: var(--ink);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+      }
+
+      .mockup.harbor {
+        --canvas: #f4f5f8;
+        --ink: #1d2633;
+        --primary: #2f5e91;
+        --secondary: #426a63;
+        --highlight: #8a6ead;
+        --border: #d9dfe8;
+        --panel: rgba(255, 255, 255, 0.68);
+      }
+
+      .mockup.plum {
+        --canvas: #f5f1f5;
+        --ink: #2c252d;
+        --primary: #6d426d;
+        --secondary: #62705c;
+        --highlight: #a97858;
+        --border: #ded4dd;
+        --panel: rgba(255, 255, 255, 0.66);
+      }
+
+      .mockup-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 22px clamp(18px, 4vw, 42px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 720;
+        letter-spacing: -0.02em;
+      }
+
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        color: var(--primary);
+      }
+
+      .mockup-nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        color: color-mix(in srgb, var(--ink) 68%, transparent);
+        font-size: 0.92rem;
+      }
+
+      .mockup-nav span:first-child {
+        color: var(--primary);
+        font-weight: 720;
+      }
+
+      .mockup-content {
+        padding: clamp(22px, 5vw, 54px);
+      }
+
+      .palette-title-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 34px;
+      }
+
+      .label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        color: var(--primary);
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .label::before {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--highlight);
+        content: "";
+      }
+
+      .palette-title {
+        max-width: 700px;
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.3rem, 5vw, 5rem);
+        font-weight: 400;
+        letter-spacing: -0.055em;
+        line-height: 0.95;
+      }
+
+      .palette-title em {
+        color: var(--primary);
+        font-style: normal;
+      }
+
+      .palette-note {
+        max-width: 280px;
+        margin: 4px 0 0;
+        color: color-mix(in srgb, var(--ink) 64%, transparent);
+        font-size: 0.95rem;
+      }
+
+      .hero-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+        gap: 18px;
+      }
+
+      .statement {
+        min-height: 270px;
+        padding: clamp(24px, 5vw, 42px);
+        border: 1px solid var(--border);
+        border-radius: 26px;
+        background: var(--panel);
+      }
+
+      .statement h3 {
+        max-width: 640px;
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.9rem, 4vw, 3.9rem);
+        font-weight: 400;
+        letter-spacing: -0.045em;
+        line-height: 1;
+      }
+
+      .statement p {
+        max-width: 600px;
+        margin: 22px 0 0;
+        color: color-mix(in srgb, var(--ink) 70%, transparent);
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 11px 16px;
+        font-size: 0.92rem;
+        font-weight: 760;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        background: var(--primary);
+        color: var(--canvas);
+      }
+
+      .button.secondary {
+        border: 1px solid var(--border);
+        color: var(--ink);
+      }
+
+      .side-panel {
+        display: grid;
+        gap: 14px;
+      }
+
+      .metric-card,
+      .mini-card {
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: var(--panel);
+      }
+
+      .metric-card {
+        padding: 28px;
+      }
+
+      .metric {
+        color: var(--primary);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 4.2rem;
+        letter-spacing: -0.08em;
+        line-height: 0.95;
+      }
+
+      .metric-card p {
+        margin: 12px 0 0;
+        color: color-mix(in srgb, var(--ink) 66%, transparent);
+      }
+
+      .mini-card {
+        padding: 22px;
+      }
+
+      .mini-card strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--secondary);
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .mini-card p {
+        margin: 0;
+        color: color-mix(in srgb, var(--ink) 76%, transparent);
+      }
+
+      .section-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .service-card {
+        min-height: 176px;
+        padding: 22px;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: color-mix(in srgb, var(--panel) 88%, var(--canvas));
+      }
+
+      .service-card .number {
+        color: var(--highlight);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 2rem;
+        letter-spacing: -0.04em;
+      }
+
+      .service-card h4 {
+        margin: 16px 0 8px;
+        font-size: 1.02rem;
+      }
+
+      .service-card p {
+        margin: 0;
+        color: color-mix(in srgb, var(--ink) 64%, transparent);
+        font-size: 0.93rem;
+      }
+
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .swatch {
+        overflow: hidden;
+        min-height: 94px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: var(--swatch);
+      }
+
+      .swatch span {
+        display: block;
+        height: 54px;
+        background: var(--swatch);
+      }
+
+      .swatch small {
+        display: block;
+        padding: 8px 10px 10px;
+        background: color-mix(in srgb, var(--canvas) 90%, white);
+        color: color-mix(in srgb, var(--ink) 72%, transparent);
+        font-size: 0.72rem;
+        font-weight: 760;
+      }
+
+      .recommendation {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        padding: 8px 11px;
+        background: color-mix(in srgb, var(--primary) 12%, var(--canvas));
+        color: var(--primary);
+        font-size: 0.78rem;
+        font-weight: 840;
+      }
+
+      .compact .mockup-content {
+        padding: clamp(20px, 4vw, 36px);
+      }
+
+      .compact .palette-title {
+        font-size: clamp(2rem, 4vw, 3.6rem);
+      }
+
+      .compact .hero-card {
+        grid-template-columns: 1fr;
+      }
+
+      .compact .statement {
+        min-height: auto;
+      }
+
+      .compact .statement h3 {
+        font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+      }
+
+      .compact .side-panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      @media (max-width: 860px) {
+        .intro {
+          padding: 24px;
+        }
+
+        .mockup-header,
+        .palette-title-row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .mockup-nav {
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        .hero-card,
+        .section-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .swatches {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .compact .side-panel {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="intro">
+        <p class="eyebrow">Color direction mockups</p>
+        <h1>Three alternate palettes for Junto Advisory.</h1>
+        <p>
+          These are intentionally generic page samples: enough nav, hero, cards,
+          CTA, and swatches to feel the brand system without editing the live
+          site yet. My favorite is Atlantic Workshop because it keeps the warmth
+          and craft, but moves the site decisively away from the Claude-adjacent
+          cream/terracotta read.
+        </p>
+        <div class="quick-links">
+          <a href="#atlantic">Atlantic Workshop</a>
+          <a href="#harbor">Harbor Blue</a>
+          <a href="#plum">Plum &amp; Sage</a>
+        </div>
+      </section>
+
+      <section id="atlantic" class="mockup">
+        <header class="mockup-header">
+          <div class="brand">
+            <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linejoin="round"
+                stroke-width="4"
+                d="M32 4 56 18v28L32 60 8 46V18z"
+              />
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                d="M8 18l24 14 24-14M32 32v28"
+              />
+            </svg>
+            <span>Junto Advisory</span>
+          </div>
+          <nav class="mockup-nav" aria-label="Preview navigation">
+            <span>Home</span>
+            <span>Services</span>
+            <span>About</span>
+            <span>Contact</span>
+          </nav>
+        </header>
+
+        <div class="mockup-content">
+          <div class="palette-title-row">
+            <div>
+              <div class="label">Recommended palette</div>
+              <h2 class="palette-title">
+                Atlantic <em>Workshop</em>
+              </h2>
+            </div>
+            <p class="palette-note">
+              Cool green-blue replaces terracotta as the main accent. Brass stays
+              as a small warmth note.
+            </p>
+          </div>
+
+          <div class="hero-card">
+            <article class="statement">
+              <h3>
+                Advisory support for the messy, human middle of strategic change.
+              </h3>
+              <p>
+                A steadier, quieter palette: maritime without feeling corporate,
+                thoughtful without turning sleepy, and still warm enough for a
+                relationship-led advisory practice.
+              </p>
+              <div class="cta-row">
+                <a class="button primary" href="#">Start a conversation</a>
+                <a class="button secondary" href="#">Explore services</a>
+              </div>
+            </article>
+
+            <aside class="side-panel">
+              <div class="metric-card">
+                <div class="metric">01</div>
+                <p>Discovery, diagnosis, and honest alignment before action.</p>
+              </div>
+              <div class="mini-card">
+                <strong>Why it works</strong>
+                <p>
+                  The teal has enough distinction to become ownable, while the
+                  soft gray-green canvas keeps the editorial feel.
+                </p>
+              </div>
+            </aside>
+          </div>
+
+          <div class="section-grid" aria-label="Sample content cards">
+            <article class="service-card">
+              <div class="number">01</div>
+              <h4>Strategic clarity</h4>
+              <p>Frame the real decision, not just the apparent project brief.</p>
+            </article>
+            <article class="service-card">
+              <div class="number">02</div>
+              <h4>Operating rhythm</h4>
+              <p>Turn intent into cadence, ownership, and useful conversation.</p>
+            </article>
+            <article class="service-card">
+              <div class="number">03</div>
+              <h4>Leadership counsel</h4>
+              <p>Support leaders through ambiguity with practical judgment.</p>
+            </article>
+          </div>
+
+          <div class="swatches" aria-label="Atlantic Workshop swatches">
+            <div class="swatch" style="--swatch: #f2f5f3"><span></span><small>Canvas #F2F5F3</small></div>
+            <div class="swatch" style="--swatch: #17272e"><span></span><small>Ink #17272E</small></div>
+            <div class="swatch" style="--swatch: #1f6e73"><span></span><small>Primary #1F6E73</small></div>
+            <div class="swatch" style="--swatch: #5b6e63"><span></span><small>Secondary #5B6E63</small></div>
+            <div class="swatch" style="--swatch: #b58a4b"><span></span><small>Highlight #B58A4B</small></div>
+            <div class="swatch" style="--swatch: #d7e0dc"><span></span><small>Border #D7E0DC</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="harbor" class="mockup harbor compact">
+        <header class="mockup-header">
+          <div class="brand">
+            <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4" d="M32 4 56 18v28L32 60 8 46V18z" />
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M8 18l24 14 24-14M32 32v28" />
+            </svg>
+            <span>Junto Advisory</span>
+          </div>
+          <nav class="mockup-nav" aria-label="Preview navigation">
+            <span>Home</span>
+            <span>Services</span>
+            <span>About</span>
+          </nav>
+        </header>
+
+        <div class="mockup-content">
+          <div class="palette-title-row">
+            <div>
+              <div class="label">Option two</div>
+              <h2 class="palette-title">Harbor <em>Blue</em></h2>
+            </div>
+            <p class="palette-note">
+              More conventional and trust-forward. The safest “professional
+              services” direction.
+            </p>
+          </div>
+
+          <div class="hero-card">
+            <article class="statement">
+              <h3>Calm structure for complicated growth moments.</h3>
+              <p>
+                This version leans crisp and established. The violet highlight
+                gives the system a little uncommonness so it does not become
+                generic consulting blue.
+              </p>
+              <div class="cta-row">
+                <a class="button primary" href="#">Start a conversation</a>
+                <a class="button secondary" href="#">View approach</a>
+              </div>
+            </article>
+            <aside class="side-panel">
+              <div class="mini-card">
+                <strong>Best for</strong>
+                <p>Maximum trust, clarity, and broad audience familiarity.</p>
+              </div>
+              <div class="mini-card">
+                <strong>Watchout</strong>
+                <p>It may need stronger photography or typography to feel unique.</p>
+              </div>
+            </aside>
+          </div>
+
+          <div class="swatches" aria-label="Harbor Blue swatches">
+            <div class="swatch" style="--swatch: #f4f5f8"><span></span><small>Canvas #F4F5F8</small></div>
+            <div class="swatch" style="--swatch: #1d2633"><span></span><small>Ink #1D2633</small></div>
+            <div class="swatch" style="--swatch: #2f5e91"><span></span><small>Primary #2F5E91</small></div>
+            <div class="swatch" style="--swatch: #426a63"><span></span><small>Secondary #426A63</small></div>
+            <div class="swatch" style="--swatch: #8a6ead"><span></span><small>Highlight #8A6EAD</small></div>
+            <div class="swatch" style="--swatch: #d9dfe8"><span></span><small>Border #D9DFE8</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="plum" class="mockup plum compact">
+        <header class="mockup-header">
+          <div class="brand">
+            <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4" d="M32 4 56 18v28L32 60 8 46V18z" />
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M8 18l24 14 24-14M32 32v28" />
+            </svg>
+            <span>Junto Advisory</span>
+          </div>
+          <nav class="mockup-nav" aria-label="Preview navigation">
+            <span>Home</span>
+            <span>Services</span>
+            <span>Contact</span>
+          </nav>
+        </header>
+
+        <div class="mockup-content">
+          <div class="palette-title-row">
+            <div>
+              <div class="label">Option three</div>
+              <h2 class="palette-title">Plum &amp; <em>Sage</em></h2>
+            </div>
+            <p class="palette-note">
+              More intimate, literary, and founder-led. The warmest alternative
+              without returning to terracotta.
+            </p>
+          </div>
+
+          <div class="hero-card">
+            <article class="statement">
+              <h3>A more reflective palette for careful, relational advisory work.</h3>
+              <p>
+                Plum brings depth and memorability; sage keeps the palette from
+                feeling precious. This one has the most boutique personality.
+              </p>
+              <div class="cta-row">
+                <a class="button primary" href="#">Start a conversation</a>
+                <a class="button secondary" href="#">Read more</a>
+              </div>
+            </article>
+            <aside class="side-panel">
+              <div class="mini-card">
+                <strong>Best for</strong>
+                <p>A more personal, high-touch, editorial brand impression.</p>
+              </div>
+              <div class="mini-card">
+                <strong>Watchout</strong>
+                <p>It is distinctive, but less neutral than Atlantic Workshop.</p>
+              </div>
+            </aside>
+          </div>
+
+          <div class="swatches" aria-label="Plum and Sage swatches">
+            <div class="swatch" style="--swatch: #f5f1f5"><span></span><small>Canvas #F5F1F5</small></div>
+            <div class="swatch" style="--swatch: #2c252d"><span></span><small>Ink #2C252D</small></div>
+            <div class="swatch" style="--swatch: #6d426d"><span></span><small>Primary #6D426D</small></div>
+            <div class="swatch" style="--swatch: #62705c"><span></span><small>Secondary #62705C</small></div>
+            <div class="swatch" style="--swatch: #a97858"><span></span><small>Highlight #A97858</small></div>
+            <div class="swatch" style="--swatch: #ded4dd"><span></span><small>Border #DED4DD</small></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

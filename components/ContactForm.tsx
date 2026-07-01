@@ -36,7 +36,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-charcoal/70 mb-1.5">
+        <label htmlFor="name" className="block text-sm font-medium text-ink/70 mb-1.5">
           Name
         </label>
         <input
@@ -44,13 +44,13 @@ export default function ContactForm() {
           id="name"
           name="name"
           required
-          className="w-full rounded-lg border border-sand bg-white/80 px-4 py-3 text-charcoal placeholder:text-charcoal/30 focus:border-terracotta/40 focus:outline-none focus:ring-1 focus:ring-terracotta/20 transition-colors"
+          className="w-full rounded-lg border border-border bg-white/80 px-4 py-3 text-ink placeholder:text-ink/30 focus:border-primary/40 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-colors"
           placeholder="Your name"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-charcoal/70 mb-1.5">
+        <label htmlFor="email" className="block text-sm font-medium text-ink/70 mb-1.5">
           Email
         </label>
         <input
@@ -58,13 +58,13 @@ export default function ContactForm() {
           id="email"
           name="email"
           required
-          className="w-full rounded-lg border border-sand bg-white/80 px-4 py-3 text-charcoal placeholder:text-charcoal/30 focus:border-terracotta/40 focus:outline-none focus:ring-1 focus:ring-terracotta/20 transition-colors"
+          className="w-full rounded-lg border border-border bg-white/80 px-4 py-3 text-ink placeholder:text-ink/30 focus:border-primary/40 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-colors"
           placeholder="you@example.com"
         />
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-charcoal/70 mb-1.5">
+        <label htmlFor="message" className="block text-sm font-medium text-ink/70 mb-1.5">
           Message
         </label>
         <textarea
@@ -72,7 +72,7 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="w-full rounded-lg border border-sand bg-white/80 px-4 py-3 text-charcoal placeholder:text-charcoal/30 focus:border-terracotta/40 focus:outline-none focus:ring-1 focus:ring-terracotta/20 transition-colors resize-none"
+          className="w-full rounded-lg border border-border bg-white/80 px-4 py-3 text-ink placeholder:text-ink/30 focus:border-primary/40 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-colors resize-none"
           placeholder="How can we help?"
         />
       </div>
@@ -80,7 +80,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="inline-flex items-center gap-2 rounded-lg bg-charcoal px-6 py-3 text-sm font-semibold text-white hover:bg-charcoal/90 focus:outline-none focus:ring-2 focus:ring-charcoal/20 disabled:opacity-50 transition-colors"
+        className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-canvas hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 transition-colors"
       >
         {status === 'sending' ? 'Sending…' : 'Send message'}
       </button>
