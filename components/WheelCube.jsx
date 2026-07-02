@@ -100,7 +100,7 @@ export default function WheelCube() {
       P_REST = 10
 
     const PHASES = [
-      { id: P_STILLNESS, dur: 5.0 },
+      { id: P_STILLNESS, dur: 2.0 },
       { id: P_SPIN_UP, dur: 3.0 },
       { id: P_SPIN, dur: 10.0 },
       { id: P_SPIN_DOWN, dur: 4.5 },
