@@ -210,7 +210,7 @@ export default function AboutSections() {
                             That&rsquo;s when it clicked. Junto Advisory was born, not from a business plan, but from real business experience and a longtime habit of first-principles thinking.
                           </p>
                           <p className="text-ink/70 leading-relaxed text-lg">
-                            Three moments across forty years help tell the story of Junto Advisory. My childhood inspiration from a curious inventor. The coming of age realization that the experts are human too. Then clarity, sitting in Omaha with an ice canvas bar and the dawning sense that everything I had been collecting was about to be useful.
+                            Three moments across forty years help tell the story of Junto Advisory. My childhood inspiration from a curious inventor. The coming of age realization that the experts are human too. Then clarity, sitting in Omaha with an ice cream bar and the dawning sense that everything I had been collecting was about to be useful.
                           </p>
                         </>
                       )}
