@@ -1,0 +1,2215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Junto Advisory — Working Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F4EFE4; --cream-2:#EDE6D6; --paper:#FAF7EF;
+    --charcoal:#2B2A26; --ink:#1E3A5F; --ink-soft:#3E5C82;
+    --terracotta:#BF5B2D; --ochre:#C2963B; --sage:#6E7F5C;
+    --line:#C9BFA8; --line-soft:#DCD3BE;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'DM Sans',-apple-system,Helvetica,Arial,sans-serif;
+    --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--cream);
+    background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+    background-size:32px 32px;
+    color:var(--charcoal);font-family:var(--sans);font-size:16px;line-height:1.55;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:36px 24px 90px}
+  .sheet{background:var(--paper);border:1.5px solid var(--charcoal);box-shadow:6px 6px 0 rgba(43,42,38,.12);margin-bottom:32px;position:relative}
+  .sheet::before{content:"";position:absolute;inset:8px;border:1px solid var(--line);pointer-events:none}
+  .sheet-inner{padding:38px 46px;position:relative;z-index:1}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--charcoal)}
+  .mono{font-family:var(--mono)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta);margin-bottom:8px}
+  .section-label{display:flex;align-items:center;gap:12px;margin:40px 0 16px}
+  .section-label .tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--paper);background:var(--charcoal);padding:3px 10px}
+  .section-label h2{font-size:25px}
+  .section-label .rule{flex:1;border-top:1px solid var(--charcoal)}
+  .muted{color:#6d6858}.small{font-size:13px}
+
+  /* nav */
+  .navbar{position:sticky;top:0;z-index:60;background:var(--charcoal);color:var(--paper);font-family:var(--mono)}
+  .nav-in{max-width:1120px;margin:0 auto;display:flex;gap:4px;align-items:center;padding:0 24px;flex-wrap:wrap}
+  .brand{font-size:11px;letter-spacing:.22em;padding:14px 14px 14px 0;color:var(--ochre);white-space:nowrap}
+  .tab{background:none;border:none;border-bottom:3px solid transparent;color:#b5ae9c;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;padding:15px 13px 12px;cursor:pointer}
+  .tab:hover{color:var(--paper)}
+  .tab.active{color:var(--paper);border-bottom-color:var(--terracotta)}
+  .nav-spacer{flex:1}
+  .wk-badge{font-size:10.5px;color:var(--cream);border:1px solid #57544c;padding:4px 10px;letter-spacing:.08em}
+
+  /* title block */
+  .titleblock{display:grid;grid-template-columns:1fr 300px;border-bottom:1.5px solid var(--charcoal)}
+  .titleblock-main{padding:42px 46px}
+  .titleblock-main .firm{font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink)}
+  .titleblock-main h1{font-size:44px;line-height:1.08;margin:14px 0 10px}
+  .titleblock-main .sub{font-size:17px;color:#57544c;max-width:54ch}
+  .titleblock-meta{border-left:1.5px solid var(--charcoal);display:flex;flex-direction:column}
+  .titleblock-meta div{padding:9px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px}
+  .titleblock-meta div:last-child{border-bottom:none}
+  .titleblock-meta .k{color:#8a8471;letter-spacing:.12em;text-transform:uppercase;font-size:10px;display:block}
+
+  /* story */
+  .dynamic{display:grid;grid-template-columns:1.4fr 1fr;gap:34px;align-items:start}
+  .dynamic h3{font-size:29px;font-style:italic;color:var(--ink);margin-bottom:12px}
+  .dynamic p{font-size:16.5px;margin-bottom:12px}
+  blockquote{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.45;border-left:3px solid var(--ochre);padding:6px 0 6px 20px;margin-top:8px}
+  blockquote cite{display:block;font-family:var(--mono);font-style:normal;font-size:11px;letter-spacing:.14em;color:#8a8471;margin-top:10px;text-transform:uppercase}
+  .contrast{display:grid;grid-template-columns:1fr auto 1fr;border:1.5px solid var(--charcoal);background:var(--paper)}
+  .contrast .cell{padding:26px 30px;text-align:center}
+  .contrast .vs{display:flex;align-items:center;font-family:var(--mono);color:var(--terracotta);padding:0 6px;border-left:1px dashed var(--line);border-right:1px dashed var(--line);font-size:13px}
+  .contrast .num{font-family:var(--serif);font-size:42px;font-weight:600;line-height:1}
+  .contrast .cell:first-child .num{color:var(--terracotta)}
+  .contrast .cell:last-child .num{color:var(--ink)}
+  .contrast .lbl{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#6d6858;margin-top:10px}
+  .contrast-note{font-size:13.5px;color:#6d6858;margin-top:10px;font-style:italic}
+  .journey{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid var(--charcoal)}
+  .j-col{padding:24px 28px}
+  .j-col:first-child{border-right:1.5px solid var(--charcoal);background:var(--cream-2)}
+  .j-col h3{font-size:22px;margin-bottom:14px}
+  .j-col:first-child h3{color:#6d6858}
+  .j-col:last-child h3{color:var(--ink)}
+  .j-moment{padding:10px 0 10px 24px;border-bottom:1px dashed var(--line);position:relative;font-size:14.5px}
+  .j-moment:last-child{border-bottom:none}
+  .j-col:first-child .j-moment::before{content:"✕";position:absolute;left:0;color:var(--terracotta);font-size:12px;top:13px}
+  .j-col:last-child .j-moment::before{content:"→";position:absolute;left:0;color:var(--sage);font-size:12px;top:13px}
+  .j-note{font-size:13.5px;font-style:italic;color:#6d6858;margin-top:10px}
+
+  /* map */
+  .mapbox{border:1.5px solid var(--charcoal);background:var(--paper);padding:10px 6px 2px;overflow-x:auto}
+  .maphint{font-family:var(--mono);font-size:11px;color:#8a8471;margin:8px 2px 0}
+  .node{cursor:pointer}
+  .node rect{fill:var(--paper);stroke:var(--charcoal);stroke-width:1.5}
+  .node:hover rect{fill:var(--cream-2)}
+  .node text{font-family:var(--sans);font-size:12.5px;fill:var(--charcoal)}
+  .node .n-num{font-family:var(--mono);font-size:10px;fill:var(--terracotta)}
+  .edge{fill:none;stroke:var(--ink-soft);stroke-width:1.3;marker-end:url(#arrow)}
+  .edge-lbl{font-family:var(--mono);font-size:9.5px;fill:var(--ink-soft)}
+  .phase-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;fill:#8a8471}
+  .phase-line{stroke:var(--line);stroke-dasharray:4 5}
+
+  /* chips */
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:3px 9px;border:1.2px solid;display:inline-block;text-transform:uppercase}
+  .v-CHAMPION{color:#5c4a12;border-color:var(--ochre);background:rgba(194,150,59,.14)}
+  .v-ADOPT{color:var(--ink);border-color:var(--ink);background:rgba(30,58,95,.08)}
+  .v-CONDITIONS{color:#7a5b16;border-color:#b28a2e;background:rgba(194,150,59,.08)}
+  .v-DEFER{color:#57544c;border-color:#8a8471;background:rgba(138,132,113,.10)}
+  .v-REJECT{color:var(--terracotta);border-color:var(--terracotta);background:rgba(191,91,45,.10)}
+  .sig{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border:1.3px solid var(--charcoal)}
+  .sig-strong{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .sig-rec{background:rgba(30,58,95,.09);color:var(--ink)}
+  .sig-cond{background:rgba(194,150,59,.12);color:#7a5b16}
+  .agree{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;display:inline-block}
+  .agree-consensus{background:rgba(110,127,92,.15);color:#44543a;border:1.2px solid var(--sage)}
+  .agree-split{background:rgba(194,150,59,.15);color:#7a5b16;border:1.2px solid var(--ochre)}
+  .agree-conflict{background:rgba(191,91,45,.14);color:var(--terracotta);border:1.2px solid var(--terracotta)}
+  .tag-verified{color:#44543a;border-color:var(--sage);background:rgba(110,127,92,.12)}
+  .tag-estimated,.tag-unverified{color:#7a5b16;border-color:#b28a2e;background:rgba(194,150,59,.10)}
+  .st-met{color:#44543a;border-color:var(--sage);background:rgba(110,127,92,.12)}
+  .st-moving{color:#7a5b16;border-color:var(--ochre);background:rgba(194,150,59,.12)}
+  .st-watch{color:var(--terracotta);border-color:var(--terracotta);background:rgba(191,91,45,.10)}
+  .st-await{color:#57544c;border-color:#8a8471;background:rgba(138,132,113,.08)}
+
+  /* plan index + detail (blueprint DNA) */
+  table.index{width:100%;border-collapse:collapse;border:1.5px solid var(--charcoal)}
+  table.index th{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:10px 14px;background:var(--charcoal);color:var(--paper);font-weight:500}
+  table.index td{padding:14px;border-bottom:1px solid var(--line);vertical-align:middle}
+  table.index tr:last-child td{border-bottom:none}
+  table.index tr.rowlink{cursor:pointer}
+  table.index tr.rowlink:hover td{background:var(--cream-2)}
+  .idx-num{font-family:var(--mono);color:var(--terracotta);font-size:13px}
+  .idx-title{font-family:var(--serif);font-size:19px;font-weight:600}
+  .verdict-mini{display:inline-block;width:12px;height:12px;border:1px solid var(--charcoal);margin-right:4px;vertical-align:middle}
+  .progress-track{background:var(--cream-2);border:1px solid var(--line);height:10px;width:110px;position:relative;display:inline-block;vertical-align:middle}
+  .progress-fill{position:absolute;top:0;left:0;bottom:0;background:var(--sage)}
+  .pct{font-family:var(--mono);font-size:11px;color:#6d6858;margin-left:8px}
+  .sheet-head{display:flex;gap:26px;align-items:flex-start;border-bottom:1.5px solid var(--charcoal);padding-bottom:22px;margin-bottom:26px}
+  .big-num{font-family:var(--mono);font-size:52px;color:var(--terracotta);line-height:1;padding-top:4px}
+  .sheet-head h1{font-size:34px;line-height:1.1;margin:2px 0 10px}
+  .headtags{display:flex;gap:10px;flex-wrap:wrap}
+  .why{background:var(--cream-2);border-left:3px solid var(--terracotta);padding:14px 18px;margin-top:16px;font-size:15.5px}
+  .why b{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--terracotta);display:block;margin-bottom:5px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border:1.5px solid var(--charcoal)}
+  .stat{padding:18px 20px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat .val{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--ink)}
+  .stat .lb{font-size:12.5px;color:#6d6858;margin:4px 0 8px}
+  .costline{display:flex;flex-wrap:wrap;gap:26px;font-family:var(--mono);font-size:12.5px;padding:12px 2px;color:#57544c}
+  .costline b{color:var(--charcoal)}
+  .panel{display:grid;grid-template-columns:repeat(3,1fr);border:1.5px solid var(--charcoal)}
+  .persp{padding:20px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+  .persp:last-child{border-right:none}
+  .persp .p-title{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6d6858}
+  .persp .p-name{font-family:var(--serif);font-size:22px;font-weight:600}
+  .persp .p-axis{font-size:12px;color:#8a8471;font-style:italic;margin-top:-6px}
+  .persp .p-score{font-family:var(--mono);font-size:12px;color:var(--ink)}
+  .persp .p-reason{font-size:14px}
+  .resolution{border:1.5px solid var(--charcoal);border-top:none;padding:20px 24px;background:var(--cream-2)}
+  .resolution .r-head{display:flex;gap:12px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+  .resolution .crux{font-size:15px;margin-bottom:10px}
+  .resolution .crux b,.resolution .call b{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);display:block;margin-bottom:4px}
+  .resolution .call{font-size:15px}
+  .gatecard{border:1.5px solid var(--ochre);background:rgba(194,150,59,.07);padding:16px 20px;margin-top:14px}
+  .gatecard .g-title{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7a5b16;margin-bottom:6px}
+  .gatecard .g-crit{font-size:15px;font-weight:500}
+  .gatecard .g-branch{font-size:13.5px;color:#6d6858;margin-top:6px}
+  .steps{border:1.5px solid var(--charcoal)}
+  .step{display:flex;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line);align-items:flex-start}
+  .step:last-child{border-bottom:none}
+  .step input[type=checkbox]{appearance:none;width:19px;height:19px;border:1.5px solid var(--charcoal);background:var(--paper);cursor:pointer;flex-shrink:0;margin-top:2px;position:relative}
+  .step input[type=checkbox]:checked{background:var(--sage);border-color:var(--sage)}
+  .step input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:13px}
+  .step.done .s-text{text-decoration:line-through;color:#8a8471}
+  .step .s-text{font-size:15px;font-weight:500;cursor:pointer}
+  .step .s-meta{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--terracotta);margin-top:3px;text-transform:uppercase}
+  .step .s-detail{font-size:13.5px;color:#6d6858;margin-top:3px}
+  .step .s-done{font-size:12.5px;color:#44543a;margin-top:4px;font-style:italic}
+  .step .s-done b{font-family:var(--mono);font-size:10px;font-style:normal;letter-spacing:.1em;color:var(--sage)}
+  .howto-btn{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;border:1.2px solid var(--ink);color:var(--ink);background:rgba(30,58,95,.05);padding:4px 10px;cursor:pointer;margin-top:8px}
+  .howto-btn:hover{background:var(--ink);color:var(--paper)}
+  .howto{border:1.2px solid var(--ink);background:rgba(30,58,95,.04);margin-top:10px;padding:16px 18px}
+  .howto .h-sec{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:12px 0 6px}
+  .howto .h-sec:first-child{margin-top:0}
+  .howto ol{margin-left:20px}
+  .howto ol li{font-size:14px;padding:4px 0}
+  .howto ul.snags{list-style:none;margin:0}
+  .howto ul.snags li{font-size:13.5px;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .howto ul.snags li:last-child{border-bottom:none}
+  .howto ul.snags b{color:var(--terracotta)}
+  .howto .h-meta{font-family:var(--mono);font-size:11px;color:#6d6858;margin-top:4px}
+  .howto .h-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+  .copied{color:#44543a;font-family:var(--mono);font-size:11px;align-self:center}
+  .guide-mark{font-family:var(--mono);font-size:9.5px;color:var(--ink);border:1px solid var(--ink-soft);padding:1px 6px;margin-left:8px;letter-spacing:.08em}
+  .steps-progress{display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--charcoal);color:var(--paper);font-family:var(--mono);font-size:12px}
+  .steps-progress .progress-track{width:200px;background:#4a4942;border-color:#4a4942}
+  .metrics{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .metric-col{border:1.5px solid var(--charcoal)}
+  .metric-col .m-head{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:9px 16px;background:var(--charcoal);color:var(--paper)}
+  .metric{padding:13px 16px;border-bottom:1px solid var(--line);font-size:14px}
+  .metric:last-child{border-bottom:none}
+  .metric .m-kpi{font-weight:700}
+  .metric .m-sub{color:#6d6858;font-size:13px;margin-top:2px}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  ul.plain{list-style:none}
+  ul.plain li{padding:9px 0 9px 22px;border-bottom:1px dashed var(--line);position:relative;font-size:14.5px}
+  ul.plain li::before{content:"—";position:absolute;left:0;color:var(--terracotta)}
+  ul.plain li:last-child{border-bottom:none}
+  .dep-chip{cursor:pointer;text-decoration:underline;text-decoration-color:var(--ochre);text-underline-offset:3px}
+  .toolrow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+  .toolrow:last-child{border-bottom:none}
+  .navbtn{background:none;border:1px solid var(--charcoal);color:var(--charcoal);font-family:var(--mono);font-size:11.5px;padding:6px 13px;cursor:pointer;letter-spacing:.06em}
+  .navbtn:hover{background:var(--charcoal);color:var(--paper)}
+  .btn-solid{background:var(--terracotta);border-color:var(--terracotta);color:var(--paper)}
+  .btn-solid:hover{background:var(--charcoal);border-color:var(--charcoal)}
+
+  /* people */
+  .person-card{border:1.5px solid var(--charcoal);margin-bottom:22px;background:var(--paper)}
+  .person-head{display:flex;align-items:baseline;gap:14px;padding:16px 20px;background:var(--cream-2);border-bottom:1.5px solid var(--charcoal);flex-wrap:wrap}
+  .person-head h3{font-size:23px}
+  .person-head .role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6d6858}
+  .loadwarn{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border:1.2px solid var(--terracotta);color:var(--terracotta);background:rgba(191,91,45,.08)}
+  .loadok{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:3px 9px;border:1.2px solid var(--sage);color:#44543a;background:rgba(110,127,92,.08)}
+  .p-step{display:flex;gap:12px;align-items:flex-start;padding:11px 20px;border-bottom:1px dashed var(--line);font-size:14.5px}
+  .p-step:last-child{border-bottom:none}
+  .p-step .w{font-family:var(--mono);font-size:11px;color:var(--terracotta);white-space:nowrap;min-width:120px;padding-top:2px}
+  .p-step .sheetref{font-family:var(--mono);font-size:10.5px;color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:2px;white-space:nowrap;padding-top:3px}
+  .p-step input[type=checkbox]{appearance:none;width:16px;height:16px;border:1.5px solid var(--charcoal);cursor:pointer;flex-shrink:0;margin-top:3px;position:relative;background:var(--paper)}
+  .p-step input[type=checkbox]:checked{background:var(--sage);border-color:var(--sage)}
+  .p-step input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:11px}
+  .p-step.done .txt{text-decoration:line-through;color:#8a8471}
+
+  /* timeline */
+  .tl-box{border:1.5px solid var(--charcoal);background:var(--paper);overflow-x:auto;padding:6px}
+  .tl-lbl{font-family:var(--sans);font-size:11.5px;fill:var(--charcoal)}
+  .tl-rec{font-family:var(--mono);font-size:11px;fill:var(--ink);font-weight:600;letter-spacing:.06em}
+  .tl-week{font-family:var(--mono);font-size:9px;fill:#8a8471}
+  .tl-grid{stroke:var(--line-soft);stroke-width:1}
+  .tl-today{stroke:var(--terracotta);stroke-width:1.6}
+  .tl-todaylbl{font-family:var(--mono);font-size:9.5px;fill:var(--terracotta);letter-spacing:.1em}
+  .tl-phase{fill:rgba(30,58,95,.045)}
+  .tl-phaselbl{font-family:var(--mono);font-size:9.5px;fill:#8a8471;letter-spacing:.14em}
+
+  /* scoreboard */
+  table.score{width:100%;border-collapse:collapse;border:1.5px solid var(--charcoal)}
+  table.score th{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:10px 14px;background:var(--charcoal);color:var(--paper);font-weight:500}
+  table.score td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:14.5px;vertical-align:middle}
+  table.score tr.rec-row td{background:var(--cream-2);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+  table.score input[type=number]{width:110px;font-family:var(--mono);font-size:14px;padding:6px 8px;border:1.5px solid var(--charcoal);background:var(--paper);color:var(--charcoal)}
+  table.score input[type=number]:focus{outline:2px solid var(--ochre)}
+
+  /* check-in */
+  .ck-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .ck-card{border:1.5px solid var(--charcoal);background:var(--paper)}
+  .ck-card .ck-head{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:10px 16px;background:var(--charcoal);color:var(--paper)}
+  .ck-card .ck-body{padding:16px 18px}
+  .ck-item{padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+  .ck-item:last-child{border-bottom:none}
+  .ck-item .ref{font-family:var(--mono);font-size:10.5px;color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+  .agenda{border:1.5px solid var(--charcoal);background:var(--cream-2);padding:20px 26px;margin-bottom:26px}
+  .agenda ol{margin-left:20px}
+  .agenda li{padding:5px 0;font-size:15.5px}
+  .gate-status button{margin-right:6px;margin-top:8px}
+  .gate-status .on{background:var(--charcoal);color:var(--paper)}
+  textarea.note{width:100%;min-height:74px;border:1.5px solid var(--charcoal);background:var(--paper);font-family:var(--sans);font-size:14px;padding:10px;resize:vertical}
+  textarea.note:focus{outline:2px solid var(--ochre)}
+  .syncbox{border:1.5px dashed var(--charcoal);padding:20px 24px;background:rgba(194,150,59,.05)}
+
+  /* dashboard */
+  .dash-banner{border:1.5px solid var(--charcoal);background:var(--charcoal);color:var(--paper);padding:20px 26px;display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-bottom:24px}
+  .dash-banner .b-week{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--ochre)}
+  .dash-banner .b-focus{font-family:var(--serif);font-size:22px;font-weight:600;flex:1;min-width:260px}
+  .dash-banner .b-prog{font-family:var(--mono);font-size:12px;display:flex;align-items:center;gap:10px}
+  .dash-banner .progress-track{background:#4a4942;border-color:#4a4942;width:150px}
+  .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .dash-full{grid-column:1 / -1}
+  .todo-row{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .todo-row:last-child{border-bottom:none}
+  .todo-row input[type=checkbox]{appearance:none;width:16px;height:16px;border:1.5px solid var(--charcoal);cursor:pointer;flex-shrink:0;margin-top:2px;position:relative;background:var(--paper)}
+  .todo-row input[type=checkbox]:checked{background:var(--sage);border-color:var(--sage)}
+  .todo-row input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:11px}
+  .todo-row .t-meta{font-family:var(--mono);font-size:10.5px;color:#6d6858;display:block;margin-top:2px}
+  .todo-row.late .t-flag{color:var(--terracotta);font-family:var(--mono);font-size:10px;letter-spacing:.08em}
+  table.pulse{width:100%;border-collapse:collapse}
+  table.pulse td{padding:9px 10px;border-bottom:1px dashed var(--line);font-size:14px;vertical-align:middle}
+  table.pulse tr:last-child td{border-bottom:none}
+  table.pulse .p-name{font-weight:700}
+  table.pulse .p-role{font-family:var(--mono);font-size:10px;color:#8a8471;display:block;letter-spacing:.06em;text-transform:uppercase}
+  .headline-chip{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .headline-chip:last-child{border-bottom:none}
+  .headline-chip .h-nums{font-family:var(--mono);font-size:11.5px;color:#57544c;white-space:nowrap}
+  @media (max-width:840px){.dash-grid{grid-template-columns:1fr}.dash-banner .b-focus{font-size:18px}}
+  .foot{font-family:var(--mono);font-size:11px;color:#8a8471;line-height:1.7;border-top:1px solid var(--line);padding-top:16px;margin-top:40px}
+  .future{border:1.5px dashed var(--charcoal);padding:20px 24px}
+  .future .fitem{padding:8px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+  .future .fitem:last-child{border-bottom:none}
+  .future .fitem b{font-family:var(--serif);font-size:16.5px}
+
+  @media (max-width:840px){
+    .titleblock,.dynamic,.journey,.metrics,.two-col,.ck-grid{grid-template-columns:1fr}
+    .titleblock-meta{border-left:none;border-top:1.5px solid var(--charcoal);flex-direction:row;flex-wrap:wrap}
+    .titleblock-meta div{flex:1 1 40%}
+    .panel{grid-template-columns:1fr}
+    .persp{border-right:none;border-bottom:1px solid var(--line)}
+    .sheet-inner{padding:24px 20px}
+    .titleblock-main{padding:28px 20px}
+    .j-col:first-child{border-right:none;border-bottom:1.5px solid var(--charcoal)}
+  }
+  @media print{
+    body{background:#fff}
+    .navbar,.maphint,.navbtn,.syncbox{display:none}
+    .sheet{box-shadow:none}
+    body.print-person .sheet{display:none}
+    body.print-person .person-card{display:none}
+    body.print-person .person-card.print-target{display:block}
+    body.print-person #view-root>*{display:none}
+    body.print-person #view-root{display:block}
+    body.print-person .print-holder{display:block !important}
+  }
+</style>
+</head>
+<body>
+<nav class="navbar"><div class="nav-in" id="nav-in"></div></nav>
+<div class="wrap"><div id="view-root"></div></div>
+
+<script>
+/* ============================================================
+   DREAM DATA — the Recommendation skill replaces the token
+   below with the engagement's JSON object (see dream_schema.md)
+   ============================================================ */
+const DREAM_DATA = {
+ "meta": {
+  "slug": "calder-sons-dream",
+  "client": "Calder & Sons Millwork",
+  "projectTitle": "Working Blueprint",
+  "subtitle": "Four moves to take the shop off the owner's legal pad \u2014 and the living plan you'll run them from, month by month.",
+  "date": "Week of July 20, 2026",
+  "preparedBy": "Junto Advisory",
+  "setId": "JA-2026-004",
+  "status": "DEMO \u2014 fictional client",
+  "researchAsOf": "July 22, 2026",
+  "footnote": "This is a demonstration deliverable populated with a fictional client.",
+  "engagementStartDate": "2026-07-27",
+  "consultant": {
+   "name": "Junto Advisory",
+   "email": "hello@juntoadvisory.com"
+  }
+ },
+ "people": [
+  {
+   "id": "ray",
+   "name": "Ray Calder",
+   "role": "Owner"
+  },
+  {
+   "id": "sandra",
+   "name": "Sandra Ortiz",
+   "role": "Office Manager"
+  },
+  {
+   "id": "dana",
+   "name": "Dana Whitfield",
+   "role": "Controller"
+  },
+  {
+   "id": "gus",
+   "name": "Gus Ferreira",
+   "role": "Shop Foreman"
+  },
+  {
+   "id": "miguel",
+   "name": "Miguel Reyes",
+   "role": "Floor Lead"
+  },
+  {
+   "id": "pete",
+   "name": "Pete Kowalski",
+   "role": "Floor Lead"
+  },
+  {
+   "id": "partner",
+   "name": "Implementation Partner",
+   "role": "Client-contracted builder \u2014 TBD; Junto can introduce vetted candidates"
+  },
+  {
+   "id": "junto",
+   "name": "Junto Advisory",
+   "role": "Advisor \u2014 guidance retainer. Oversees, reviews, and decides with Ray; does not implement."
+  }
+ ],
+ "narrative": {
+  "coreDynamic": {
+   "title": "The Legal Pad Economy",
+   "body": [
+    "Every job at Calder & Sons begins and ends with Ray. Quotes are priced from memory, job knowledge lives in Gus's head, and the front office finds out what the shop floor is doing by walking out and asking. The consequence is a cycle the whole leadership team described without naming: quotes go out slow, so bids are lost to faster shops; lost bids create revenue pressure; pressure pushes Ray to take marginal work priced from instinct; marginal work eats the hours he'd need to fix any of it.",
+    "None of this is a technology problem first \u2014 it is a dependency problem. The four recommendations in this plan are sequenced to move pricing logic, job knowledge, and customer communication out of individual heads and into systems the team can run without Ray in the room."
+   ]
+  },
+  "quote": {
+   "text": "Every job in this shop starts on my legal pad, and I'm the only one who can read it.",
+   "attribution": "Ray Calder, Owner \u2014 discovery conversation, July 2026"
+  },
+  "financialContrast": {
+   "a": {
+    "value": "11 days",
+    "label": "Median quote turnaround today (verified \u2014 CRM export)"
+   },
+   "b": {
+    "value": "48 hrs",
+    "label": "Turnaround of the two competitors named in lost-bid notes (estimated)"
+   },
+   "note": "Win/loss notes attribute roughly 6 of 10 lost bids to response time. Every Phase 1 move attacks this number."
+  },
+  "journey": {
+   "today": {
+    "title": "A Tuesday today",
+    "moments": [
+     "Ray prices three quotes at the kitchen table after dinner; two more wait on the legal pad.",
+     "Sandra fields the fifth \"where are my cabinets?\" call before lunch and walks to the floor to find out.",
+     "A job that lost money closed last month; nobody knows yet \u2014 Dana will feel it at the bank in March.",
+     "Gus shows Miguel the trick for the crown-molding joint. It's the fourth time. It's written down nowhere.",
+     "A $60K bid dies quietly because the quote went out on day nine."
+    ]
+   },
+   "after": {
+    "title": "A Tuesday in month twelve",
+    "moments": [
+     "Sandra runs intake; drafts wait for Ray's five-minute review at 8am. Median quote: out in two days.",
+     "Customers check their own job status; the phone rings for new business instead.",
+     "Last month's jobs are tagged green/yellow/red on margin \u2014 the yellow ones changed this month's pricing.",
+     "A new hire watches Gus explain the crown-molding joint on video, searchable from the quote line item.",
+     "Ray's legal pad holds a sketch for the new showroom, because that's what it's for now."
+    ]
+   },
+   "note": "The right column is not a promise \u2014 it is what the checkboxes in this plan add up to, if we keep them honest."
+  }
+ },
+ "phases": [
+  {
+   "id": "p1",
+   "name": "Phase 1",
+   "window": "Weeks 1\u201314",
+   "theme": "Break the quoting bottleneck; start capturing structured job data.",
+   "startWeek": 1,
+   "endWeek": 14
+  },
+  {
+   "id": "p2",
+   "name": "Phase 2",
+   "window": "Weeks 15\u201332",
+   "theme": "Turn clean job data into customer-facing trust.",
+   "startWeek": 15,
+   "endWeek": 32
+  },
+  {
+   "id": "p3",
+   "name": "Phase 3",
+   "window": "Weeks 36\u201352",
+   "theme": "Make the shop's knowledge survivable.",
+   "startWeek": 36,
+   "endWeek": 52
+  }
+ ],
+ "connections": [
+  {
+   "from": "rec-quote",
+   "to": "rec-costing",
+   "label": "structured quotes"
+  },
+  {
+   "from": "rec-costing",
+   "to": "rec-portal",
+   "label": "trustworthy data"
+  },
+  {
+   "from": "rec-costing",
+   "to": "rec-knowledge",
+   "label": "job history corpus"
+  }
+ ],
+ "gates": [
+  {
+   "id": "g-books",
+   "recId": "rec-costing",
+   "title": "Books cleanup sign-off",
+   "criterion": "Dana signs off in writing that 2025\u201326 job expenses are categorized to the new chart of accounts.",
+   "source": "Skeptic's precondition \u2014 agreed at evaluation resolution",
+   "opensWeek": 5,
+   "ifMet": "reconciliation build starts (week 6)",
+   "ifMissed": "build holds; cleanup scope re-quoted before anything downstream starts"
+  },
+  {
+   "id": "g-cutover",
+   "recId": "rec-quote",
+   "title": "Quote desk cutover gate",
+   "criterion": "Median draft-vs-approved price variance under 10% across the two-week parallel run.",
+   "source": "Exit criterion set in solution design",
+   "opensWeek": 6,
+   "ifMet": "desk goes live with the five-minute review rule",
+   "ifMissed": "parallel run extends two weeks; library gaps worked with Ray"
+  },
+  {
+   "id": "g-portal",
+   "recId": "rec-portal",
+   "title": "Milestone-logging gate",
+   "criterion": "\u226580% on-time milestone logging from the shop floor for 6 consecutive weeks.",
+   "source": "Operator's leading indicator \u2014 converted from the panel conflict at resolution",
+   "opensWeek": 16,
+   "ifMet": "portal platform selection and build begin",
+   "ifMissed": "portal holds with zero sunk cost; revisit at the next quarterly review"
+  }
+ ],
+ "recommendations": [
+  {
+   "id": "rec-quote",
+   "num": "01",
+   "title": "AI-Assisted Quote Desk with Owner Review Gate",
+   "shortTitle": "Quote Desk",
+   "phase": "p1",
+   "signal": "strong recommend",
+   "summary": "Move quote drafting from Ray's legal pad to an AI-assisted desk: intake requests are parsed against a priced line-item library seeded from the last 50 jobs, a draft quote is produced in minutes, and Ray approves or edits in a five-minute review rather than a two-hour drafting session. Ray remains the pricing authority; only the drafting labor moves.",
+   "summaryShort": "Draft quotes in minutes from a priced line-item library; Ray keeps final say.",
+   "whyNow": "Quoting is the single constraint every other problem feeds on, and the line-item library it creates is the structured-data foundation Sheets 02 and 04 require. Waiting makes everything downstream later.",
+   "impact": [
+    {
+     "value": "11 d \u2192 2 d",
+     "label": "Median quote turnaround target",
+     "tag": "estimated"
+    },
+    {
+     "value": "\u2248 9 hrs/wk",
+     "label": "Ray's drafting time returned (from his own estimate of 10\u201312 hrs)",
+     "tag": "estimated"
+    },
+    {
+     "value": "$740K",
+     "label": "Bid value lost last year where notes cite response time",
+     "tag": "verified"
+    }
+   ],
+   "costs": {
+    "implementation": "$9\u201314K",
+    "ongoing": "$200\u2013350/mo",
+    "time": "5\u20137 weeks",
+    "pricingAsOf": "Jul 2026"
+   },
+   "evaluation": {
+    "operator": {
+     "verdict": "ADOPT",
+     "score": 8,
+     "reason": "The review gate is what makes this survivable \u2014 Ray's authority is preserved, so he won't quietly route around it. Sandra can own intake with her existing skills. One concurrent change for one person."
+    },
+    "skeptic": {
+     "verdict": "ADOPT",
+     "score": 7,
+     "reason": "Downside is bounded: a bad draft still passes through Ray's review, so the failure mode is embarrassment, not a mispriced contract. Keep the library export path open and vendor lock-in stays trivial.",
+     "condition": "Seed the library from real historical quotes, not list prices \u2014 the margin data is the asset."
+    },
+    "champion": {
+     "verdict": "CHAMPION",
+     "score": 9,
+     "reason": "This is the compounding asset in the whole set: every quote enriches the price library, and quoting speed is the shop's most visible competitive surface. Same-day quotes as a marketed promise is available within a quarter."
+    },
+    "agreement": "consensus",
+    "crux": "",
+    "resolution": "Unanimous adopt-or-better. The panel's only tension was scope: the Champion wants same-day quoting marketed by Phase 2; the Operator wants two clean months first. Sequenced as: prove the desk, then market the speed.",
+    "resolutionVerdict": "ADOPT"
+   },
+   "steps": [
+    {
+     "id": "s1",
+     "text": "Export the last 50 quotes and their job outcomes from Method CRM and the shop files",
+     "ownerIds": [
+      "sandra"
+     ],
+     "ownerLabel": "Sandra (office manager)",
+     "window": {
+      "label": "Week 1",
+      "start": 1,
+      "end": 1
+     },
+     "done": "One spreadsheet: 50 quotes with line items, prices, and win/loss status \u2014 including the 14 paper-only quotes digitized.",
+     "detail": "The paper quotes carry the custom-work pricing logic; they are the asset, not the afterthought.",
+     "howto": {
+      "time": "half a day, spread over 2\u20133 sittings",
+      "difficulty": "No new software \u2014 just Method CRM and a spreadsheet",
+      "prereqs": [
+       "Your Method CRM login (any role that can view Estimates works)",
+       "The gray filing cabinet's 'Quotes 2025\u201326' folder for the paper quotes",
+       "A blank Google Sheet or Excel file named 'Calder Quote Library \u2014 Source'"
+      ],
+      "steps": [
+       "In Method CRM, open Estimates from the left menu, set the date filter to the last 18 months, and sort by date (newest first).",
+       "Use the grid's Export button (top right of the list) to download the estimate list as CSV \u2014 this gets you dates, customers, totals, and status in one shot.",
+       "Open the CSV, delete rows beyond the 50 most recent real quotes (skip internal test estimates \u2014 anything with 'TEST' or Ray's own name as customer).",
+       "Add three columns: LINE ITEMS, WON/LOST, NOTES. For each quote, open it in Method and copy the line items into the LINE ITEMS column (item \u2014 qty \u2014 unit price, one per line inside the cell).",
+       "Mark WON/LOST from the job record; where Method doesn't say, ask Sandra's Friday memory first and Ray only for the stragglers.",
+       "For the 14 paper quotes: photograph each with your phone (flat, good light), then type just the line items, prices, and outcome into new rows \u2014 attach the photo filename in NOTES.",
+       "Save the file into the shared drive folder 'Blueprint / Sheet 01' and paste the link into the check-in notes."
+      ],
+      "goodLooksLike": "50 rows, no blanks in LINE ITEMS or WON/LOST, paper quotes present, and Ray can open any row and recognize the job.",
+      "snags": [
+       {
+        "symptom": "Method's export button only exports the visible page",
+        "fix": "Bump 'rows per page' to 100 at the bottom of the grid before exporting."
+       },
+       {
+        "symptom": "A quote was revised three times and you don't know which counts",
+        "fix": "Use the version the customer answered \u2014 the one attached to the won/lost email. Note 'rev' in NOTES."
+       },
+       {
+        "symptom": "Paper quote is illegible even to Ray",
+        "fix": "Skip it, log it in NOTES as illegible \u2014 49 good rows beat 50 with a guess."
+       }
+      ]
+     }
+    },
+    {
+     "id": "s2",
+     "text": "Build the priced line-item library in two recorded working sessions",
+     "ownerIds": [
+      "ray",
+      "sandra"
+     ],
+     "ownerLabel": "Ray (narrates) \u00b7 Sandra (documents)",
+     "window": {
+      "label": "Weeks 2\u20133",
+      "start": 2,
+      "end": 3
+     },
+     "done": "Library covers \u226590% of line items appearing in the 50-quote export, each with price, unit, and Ray's pricing note.",
+     "detail": "Ray narrates the why per item; recordings capture reasoning the numbers alone would lose. Junto reviews the library structure at the week-3 check-in.",
+     "howto": {
+      "time": "two 90-minute sessions",
+      "difficulty": "A structured conversation, not a software task",
+      "prereqs": [
+       "The Sheet 01 step-1 spreadsheet, printed or on a second screen",
+       "Phone or laptop recording audio (a voice-memo app is fine)",
+       "Sandra runs the keyboard; Ray only talks"
+      ],
+      "steps": [
+       "Sort the export's line items by how often they appear \u2014 work most-common first, so session one covers most of the shop's volume.",
+       "For each item Ray gives: the price, the unit (per LF, per door, per hour), and one sentence of why \u2014 'crown molding is $X per foot but 1.5\u00d7 on curved runs because of setup waste.' Sandra types price and unit; the recording keeps the why.",
+       "When Ray says 'it depends' \u2014 that's the good stuff. Ask 'depends on what?' and capture the rule (e.g., '+20% if site is occupied'), not the exception story.",
+       "Flag any item where Ray's stated price disagrees with what the export shows customers were actually charged. Don't resolve it in-session \u2014 list it for the check-in.",
+       "End session two by checking coverage: 90% of export line items should now have a library row. The stragglers get a 'Ray must price' tag \u2014 that's allowed."
+      ],
+      "goodLooksLike": "A library Sandra could hand a smart new estimator, plus a short 'Ray disagreements' list for the check-in.",
+      "snags": [
+       {
+        "symptom": "Ray keeps pricing whole jobs instead of line items",
+        "fix": "Ask 'if we only sold this one item tomorrow, what would you charge?' \u2014 it forces the unit frame."
+       },
+       {
+        "symptom": "Sessions balloon past 90 minutes",
+        "fix": "Stop on time. Fatigue prices are bad prices; a third short session is cheaper than a wrong library."
+       }
+      ]
+     }
+    },
+    {
+     "id": "s3",
+     "text": "Stand up the Jotform intake form and Claude drafting workflow",
+     "ownerIds": [
+      "partner",
+      "sandra"
+     ],
+     "ownerLabel": "Implementation partner (build) \u00b7 Sandra (test)",
+     "window": {
+      "label": "Weeks 3\u20134",
+      "start": 3,
+      "end": 4
+     },
+     "done": "A test request entered by Sandra produces a correctly formatted draft quote in under 10 minutes with no builder in the loop.",
+     "detail": "Build spec is this sheet plus the library from step 2; Junto reviews against the acceptance criterion, the partner builds."
+    },
+    {
+     "id": "s4",
+     "text": "Run two weeks of parallel quoting \u2014 legal pad vs. desk \u2014 on every live request",
+     "ownerIds": [
+      "ray",
+      "sandra"
+     ],
+     "ownerLabel": "Ray + Sandra",
+     "window": {
+      "label": "Weeks 5\u20136",
+      "start": 5,
+      "end": 6
+     },
+     "done": "Every live request quoted both ways; comparison log shows turnaround and price variance per quote. Nothing ships from the desk yet.",
+     "detail": "Exit criterion is the cutover gate: median draft variance < 10%.",
+     "howto": {
+      "time": "\u2248 15 min per quote on top of normal work, for two weeks",
+      "difficulty": "A logging habit, not a project",
+      "prereqs": [
+       "The comparison log sheet (three columns: request date/time, desk draft price + minutes, Ray's final price + minutes)",
+       "Agreement that Ray prices his version FIRST, before looking at the draft"
+      ],
+      "steps": [
+       "When a request arrives, Sandra enters it into the intake form as usual \u2014 the desk produces its draft. Don't show Ray yet.",
+       "Ray prices the job his normal way (legal pad allowed!) and logs his number and rough minutes spent.",
+       "Now open the draft next to Ray's version and log: draft price, variance % ((draft \u2212 Ray) / Ray), and what the draft got wrong, in five words or less.",
+       "The customer always gets Ray's version during the parallel run \u2014 the desk ships nothing.",
+       "Friday: Sandra computes the week's median variance and median turnaround for both paths. Two numbers, on the log's summary tab."
+      ],
+      "goodLooksLike": "Every live request in the log, Ray never anchored by the draft, and by week two the 'what it got wrong' column repeating the same one or two themes \u2014 those become library fixes.",
+      "snags": [
+       {
+        "symptom": "Ray peeks at the draft before pricing",
+        "fix": "That quote's variance row is invalid \u2014 mark it 'anchored' and exclude from the median. Order of operations is the whole experiment."
+       },
+       {
+        "symptom": "A dead-quiet week gives you only 3 quotes",
+        "fix": "Extend the run a week rather than gate on thin data \u2014 the gate needs a median worth trusting."
+       }
+      ]
+     }
+    },
+    {
+     "id": "s5",
+     "text": "Cut over, with the five-minute review gate as the standing rule",
+     "ownerIds": [
+      "ray"
+     ],
+     "ownerLabel": "Ray (rule owner)",
+     "window": {
+      "label": "Week 7",
+      "start": 7,
+      "end": 7
+     },
+     "done": "First 10 customer-sent quotes each carry Ray's logged approval; zero quotes sent unreviewed.",
+     "detail": "No quote leaves without Ray's approval. Permanent rule, not transitional."
+    },
+    {
+     "id": "s6",
+     "text": "Day-60 review: price-variance report, then retire the legal pad",
+     "ownerIds": [
+      "ray",
+      "junto"
+     ],
+     "ownerLabel": "Ray + Junto (retainer check-in)",
+     "window": {
+      "label": "Week 12",
+      "start": 12,
+      "end": 12
+     },
+     "done": "Variance report reviewed; library updated where Ray's edits cluster; legal pad formally retired or a dated exception list exists.",
+     "detail": "Where Ray consistently edits drafts is exactly where the library still needs his judgment encoded."
+    }
+   ],
+   "metrics": {
+    "objective": [
+     {
+      "id": "m-turnaround",
+      "kpi": "Median quote turnaround",
+      "unit": "days",
+      "baseline": 11,
+      "target": 2,
+      "direction": "down",
+      "detail": "Request receipt \u2192 quote sent \u00b7 Method CRM timestamps"
+     },
+     {
+      "id": "m-quotevol",
+      "kpi": "Quotes issued per week",
+      "unit": "/wk",
+      "baseline": 6,
+      "target": 8,
+      "direction": "up",
+      "detail": "CRM count \u00b7 +30% at constant headcount"
+     },
+     {
+      "id": "m-variance",
+      "kpi": "Draft-to-approved price variance",
+      "unit": "%",
+      "baseline": 100,
+      "target": 5,
+      "direction": "down",
+      "detail": "Median % edit Ray applies to drafts \u00b7 desk logs (baseline = fully manual)"
+     }
+    ],
+    "subjective": [
+     {
+      "kpi": "Ray's evenings",
+      "detail": "Self-reported hours quoting after 6pm \u00b7 weekly \u00b7 baseline 6\u20138 hrs/wk"
+     },
+     {
+      "kpi": "Sandra's confidence running intake solo",
+      "detail": "Monthly 1\u20135 self-rating at retainer check-ins"
+     }
+    ]
+   },
+   "dependencies": [
+    {
+     "id": "rec-costing",
+     "type": "enables"
+    }
+   ],
+   "risks": [
+    "Library seeded from list prices instead of actuals would encode aspirational margins \u2014 mitigated in steps 1\u20132 design.",
+    "Ray skipping the review gate under deadline pressure normalizes unreviewed AI quotes \u2014 the standing rule in step 5 exists for this.",
+    "Vendor pricing re-verified July 2026; confirm at contract."
+   ],
+   "tools": [
+    {
+     "name": "Claude API (drafting workflow)",
+     "status": "VERIFIED",
+     "note": "GA; production quote-drafting deployments corroborated by two practitioner case studies (research log, domain 1)."
+    },
+    {
+     "name": "Jotform \u2192 Method CRM intake bridge",
+     "status": "VERIFIED",
+     "note": "Native integration confirmed against the shop's current Method CRM subscription."
+    },
+    {
+     "name": "Custom line-item library (spreadsheet-backed)",
+     "status": "VERIFIED",
+     "note": "No vendor dependency; export path trivial by design."
+    }
+   ]
+  },
+  {
+   "id": "rec-costing",
+   "num": "02",
+   "title": "Automated Job-Costing Reconciliation",
+   "shortTitle": "Job Costing",
+   "phase": "p1",
+   "signal": "recommend with conditions",
+   "summary": "Reconcile quoted price against actual cost per job automatically \u2014 labor hours from TSheets, materials from supplier invoices parsed by AI, both matched to the quote's line items. For the first time, Calder & Sons sees which job types make money and which quietly don't.",
+   "summaryShort": "Quoted vs. actual cost per job, reconciled automatically from time clock and supplier invoices.",
+   "whyNow": "The shop currently learns a job lost money only when Ray 'has a bad feeling at the bank.' Every month without per-job costing is a month of invisible margin leaks \u2014 and Sheet 01's structured quotes make this suddenly cheap to build.",
+   "impact": [
+    {
+     "value": "3\u20135%",
+     "label": "Gross margin recovery typical when per-job costing lands in a shop this size",
+     "tag": "estimated"
+    },
+    {
+     "value": "$8.5M",
+     "label": "Revenue base the margin recovery applies to",
+     "tag": "verified"
+    },
+    {
+     "value": "0",
+     "label": "Jobs currently costed against quote (per controller interview)",
+     "tag": "verified"
+    }
+   ],
+   "costs": {
+    "implementation": "$6\u201310K",
+    "ongoing": "$100\u2013250/mo",
+    "time": "6\u20138 weeks (after Sheet 01 cutover)",
+    "pricingAsOf": "Jul 2026"
+   },
+   "evaluation": {
+    "operator": {
+     "verdict": "CONDITIONS",
+     "score": 6,
+     "reason": "The workflow is sound but it lands on Dana, who also inherits intake changes from Sheet 01 in the same quarter. Two concurrent changes for the same person is my ceiling \u2014 sequencing inside Phase 1 matters more than the tooling.",
+     "condition": "Start no earlier than week 6, after Sheet 01's parallel run ends."
+    },
+    "skeptic": {
+     "verdict": "CONDITIONS",
+     "score": 6,
+     "reason": "The QuickBooks file has three years of category drift (the controller said so directly). Reconciliation built on dirty categories produces confident nonsense \u2014 worse than no report, because it gets believed.",
+     "condition": "A two-week chart-of-accounts cleanup is a prerequisite, not a parallel task."
+    },
+    "champion": {
+     "verdict": "ADOPT",
+     "score": 7,
+     "reason": "Margin visibility is the least glamorous, highest-certainty payback in the set, and the job-history corpus it builds is what makes Sheet 04 possible. I'd accept the conditions; I wouldn't accept drift past Phase 1."
+    },
+    "agreement": "split",
+    "crux": "Not whether to do it \u2014 all three say yes \u2014 but what must be true first: the Skeptic won't proceed on the current books, and the Operator won't load Dana twice at once. Both conditions are checkable facts, not opinions.",
+    "resolution": "Consultant decision: adopt with both conditions honored in sequence \u2014 books cleanup runs weeks 3\u20135 (contract bookkeeper, quoted separately), reconciliation build begins week 6. This costs three weeks of calendar and buys a number the shop can actually trust. Rationale: a margin report that gets disbelieved once is dead forever.",
+    "resolutionVerdict": "CONDITIONS"
+   },
+   "steps": [
+    {
+     "id": "s1",
+     "text": "Contract bookkeeper cleans the chart of accounts and re-categorizes 2025\u201326 job expenses",
+     "ownerIds": [
+      "dana"
+     ],
+     "ownerLabel": "Dana supervises \u00b7 contract bookkeeper executes",
+     "window": {
+      "label": "Weeks 3\u20135",
+      "start": 3,
+      "end": 5
+     },
+     "done": "Job-expense categories reconcile to the new chart; Dana signs off in writing (this is the books gate).",
+     "detail": "Fixed-scope engagement, quoted separately (~$2\u20133K). Nothing downstream starts until the sign-off exists."
+    },
+    {
+     "id": "s2",
+     "text": "Map TSheets job codes to quote line-item categories",
+     "ownerIds": [
+      "dana",
+      "miguel",
+      "pete"
+     ],
+     "ownerLabel": "Dana + floor leads (Miguel, Pete)",
+     "window": {
+      "label": "Week 6",
+      "start": 6,
+      "end": 6
+     },
+     "done": "A mapping table covering every active job code, agreed in the workshop and posted at the time clock.",
+     "detail": "One 2-hour workshop. Disagreements about codes surface here, not in month 3.",
+     "howto": {
+      "time": "one 2-hour workshop + 30 min prep",
+      "difficulty": "Facilitation, not software",
+      "prereqs": [
+       "Export the active job-code list from TSheets (Reports \u2192 Payroll \u2192 by job code covers it)",
+       "The line-item categories from the Sheet 01 library",
+       "Miguel and Pete in the same room, phones down, coffee provided"
+      ],
+      "steps": [
+       "Prep: print the job-code list. Cross out codes with zero hours in 6 months \u2014 retire them in the same meeting.",
+       "For each live code, ask the leads: 'when you punch this, what are you actually doing?' Map it to one library category. One code \u2192 one category, no exceptions.",
+       "Where the leads disagree with each other, that code was already producing garbage data \u2014 split it into two codes rather than compromise.",
+       "Codes that map to 'it depends' get split or killed. 'Shop time' is the classic offender \u2014 replace with 'milling', 'assembly', 'finishing'.",
+       "Type the final table during the meeting (Dana), read it back aloud, and get a verbal yes from both leads before anyone leaves.",
+       "Print it large, post it at the time clock, and have the leads \u2014 not Dana \u2014 announce the change to the floor."
+      ],
+      "goodLooksLike": "Every active code maps to exactly one category, both leads said yes out loud, and the poster is up by Friday.",
+      "snags": [
+       {
+        "symptom": "The leads want 30 new hyper-specific codes",
+        "fix": "Cap it: if a code won't collect 4+ hours a week, it's a NOTES field, not a code. More codes = worse compliance."
+       },
+       {
+        "symptom": "Floor pushback: 'this is surveillance'",
+        "fix": "The leads deliver the real frame: accurate codes protect the shop's pricing, which protects the shop's paychecks. It lands differently from them."
+       }
+      ]
+     }
+    },
+    {
+     "id": "s3",
+     "text": "Stand up AI invoice parsing for the top 6 suppliers",
+     "ownerIds": [
+      "partner",
+      "dana"
+     ],
+     "ownerLabel": "Implementation partner (build) \u00b7 Dana (verification)",
+     "window": {
+      "label": "Weeks 6\u20138",
+      "start": 6,
+      "end": 8
+     },
+     "done": "One full week of invoices from all 6 suppliers parsed at \u226595% line-item accuracy against Dana's manual check.",
+     "detail": "Richelieu, Hardwoods Inc., and the other four cover ~85% of material spend per the AP export. Junto reviews the accuracy report at the check-in."
+    },
+    {
+     "id": "s4",
+     "text": "Build the quoted-vs-actual report and backtest against 10 completed jobs",
+     "ownerIds": [
+      "partner",
+      "ray"
+     ],
+     "ownerLabel": "Implementation partner (build) \u00b7 Ray (review)",
+     "window": {
+      "label": "Weeks 8\u20139",
+      "start": 8,
+      "end": 9
+     },
+     "done": "Backtest reviewed with Ray; every contradiction with his memory explained (data error vs. genuine surprise) before go-live.",
+     "detail": "Backtest against jobs Ray believes he understands \u2014 trust is built on jobs with known stories. Junto facilitates the review session; the partner fixes what it surfaces."
+    },
+    {
+     "id": "s5",
+     "text": "Run the first live month; tag every closed job green/yellow/red on margin",
+     "ownerIds": [
+      "dana",
+      "ray"
+     ],
+     "ownerLabel": "Dana (report) \u00b7 Ray (tagging)",
+     "window": {
+      "label": "Weeks 10\u201314",
+      "start": 10,
+      "end": 14
+     },
+     "done": "Every job closed in the month is tagged within 10 days of completion; first monthly margin review held.",
+     "detail": "The tagging habit, not the report, is the behavior change."
+    }
+   ],
+   "metrics": {
+    "objective": [
+     {
+      "id": "m-costed",
+      "kpi": "Jobs costed within 10 days of completion",
+      "unit": "%",
+      "baseline": 0,
+      "target": 90,
+      "direction": "up",
+      "detail": "% of closed jobs with reconciled cost"
+     },
+     {
+      "id": "m-parseacc",
+      "kpi": "Invoice parsing accuracy",
+      "unit": "%",
+      "baseline": 0,
+      "target": 95,
+      "direction": "up",
+      "detail": "% of line items matched without manual fix, top-6 suppliers"
+     },
+     {
+      "id": "m-margin",
+      "kpi": "Gross margin, rolling quarter",
+      "unit": "%",
+      "baseline": 28,
+      "target": 31,
+      "direction": "up",
+      "detail": "Per QuickBooks after cleanup \u00b7 baseline per 2025 P&L"
+     }
+    ],
+    "subjective": [
+     {
+      "kpi": "Ray's pricing confidence on custom work",
+      "detail": "Does he adjust the library based on costing data? \u00b7 retainer check-ins"
+     }
+    ]
+   },
+   "dependencies": [
+    {
+     "id": "rec-quote",
+     "type": "depends on"
+    },
+    {
+     "id": "rec-portal",
+     "type": "enables"
+    },
+    {
+     "id": "rec-knowledge",
+     "type": "enables"
+    }
+   ],
+   "risks": [
+    "Dirty QuickBooks categories produce believable-but-wrong margins \u2014 addressed by the cleanup gate.",
+    "Dana overload if started concurrently with Sheet 01 \u2014 addressed by the week-6 start.",
+    "Floor resistance to stricter time-clock job coding; frame as protecting the shop's pricing, not surveilling labor."
+   ],
+   "tools": [
+    {
+     "name": "AI invoice parsing (LLM-based)",
+     "status": "VERIFIED",
+     "note": "Line-item extraction at this volume corroborated by third-party reviews; GA (research log, domain 2)."
+    },
+    {
+     "name": "QuickBooks Desktop \u2192 reporting bridge",
+     "status": "UNVERIFIED",
+     "note": "The shop runs QB Desktop 2021; connector compatibility with that vintage needs confirmation before contract."
+    },
+    {
+     "name": "TSheets job-code export",
+     "status": "VERIFIED",
+     "note": "Confirmed in current subscription tier."
+    }
+   ]
+  },
+  {
+   "id": "rec-portal",
+   "num": "03",
+   "title": "Customer Job Portal with Proactive Status Updates",
+   "shortTitle": "Client Portal",
+   "phase": "p2",
+   "signal": "recommend with conditions",
+   "summary": "A customer-facing portal where each client sees their job's stage, photos at milestones, and expected dates \u2014 with AI-drafted proactive updates replacing the 'call Sandra and ask' loop that currently consumes the front office every Friday.",
+   "summaryShort": "Job status, milestone photos, and proactive updates \u2014 ending the where's-my-cabinets call loop.",
+   "whyNow": "Honestly contested \u2014 see the panel record. It ships in Phase 2 only because Sheets 01\u201302 make its data trustworthy, and it starts only when the milestone-logging gate is met.",
+   "impact": [
+    {
+     "value": "\u2248 14 hrs/wk",
+     "label": "Front-office time on inbound status calls (verified \u2014 one-week call log)",
+     "tag": "verified"
+    },
+    {
+     "value": "2 of 9",
+     "label": "Google reviews this year citing communication as the complaint",
+     "tag": "verified"
+    },
+    {
+     "value": "\u2191 referrals",
+     "label": "Champion's case: visible professionalism in a word-of-mouth market",
+     "tag": "estimated"
+    }
+   ],
+   "costs": {
+    "implementation": "$12\u201318K",
+    "ongoing": "$300\u2013500/mo",
+    "time": "8\u201310 weeks after gate",
+    "pricingAsOf": "Jul 2026"
+   },
+   "evaluation": {
+    "operator": {
+     "verdict": "DEFER",
+     "score": 4,
+     "reason": "A portal that shows stale status is worse than no portal, and keeping it current is a daily discipline the floor hasn't built yet. The team will have absorbed two new systems in six months; a third with a public-facing failure mode is where I stop."
+    },
+    "skeptic": {
+     "verdict": "CONDITIONS",
+     "score": 5,
+     "reason": "The failure mode is reputational and customer-visible \u2014 but bounded if updates stay milestone-based (not date promises) and a human approves anything customer-facing.",
+     "condition": "Milestone-only updates; no auto-published completion dates for the first two quarters."
+    },
+    "champion": {
+     "verdict": "CHAMPION",
+     "score": 9,
+     "reason": "This is the set's only externally visible move, in a referral-driven market where every competitor communicates by voicemail. The cost of inaction is competitive, not operational \u2014 and it compounds: every delighted customer is marketing the shop can't buy."
+    },
+    "agreement": "conflict",
+    "crux": "A forecast dispute: the Operator predicts the floor won't sustain milestone updates by month 6; the Champion predicts they will, given Sheet 02's job-stage data makes updates nearly automatic. The leading indicator that settles it: milestone-logging compliance during Sheet 02's first 60 days.",
+    "resolution": "Consultant decision: conditional green light, gated not scheduled. The portal build starts only when Sheet 02 shows \u226580% on-time milestone logging for 6 consecutive weeks \u2014 the Operator's own leading indicator. If the floor hits it, the Operator's objection is answered by evidence; if not, the portal waits and we've lost nothing. The Skeptic's milestone-only condition holds regardless.",
+    "resolutionVerdict": "CONDITIONS"
+   },
+   "steps": [
+    {
+     "id": "s1",
+     "text": "Instrument the gate: track milestone-logging compliance from Sheet 02, week over week",
+     "ownerIds": [
+      "dana",
+      "junto"
+     ],
+     "ownerLabel": "Dana (tracking) \u00b7 reviewed with Junto at check-ins",
+     "window": {
+      "label": "From wk 10, ongoing",
+      "start": 10,
+      "end": null
+     },
+     "done": "A weekly compliance number exists and is reviewed at each retainer check-in; gate is \u226580% for 6 consecutive weeks.",
+     "detail": "The gate decides go/no-go, not opinion."
+    },
+    {
+     "id": "s2",
+     "text": "Select portal platform: Buildertrend vs. JobTread (shortlist from research log, domain 3)",
+     "ownerIds": [
+      "ray",
+      "junto"
+     ],
+     "ownerLabel": "Ray decides \u00b7 Junto recommends",
+     "window": {
+      "label": "Gate +1 wk (projected)",
+      "start": 17,
+      "end": 17,
+      "projected": true
+     },
+     "done": "Signed order form with the selected vendor; runner-up documented with the reason not chosen; pricing re-verified at signature.",
+     "detail": "Both fictional stand-ins in this demo \u2014 a real engagement names the real pair from the research log."
+    },
+    {
+     "id": "s3",
+     "text": "Design the six-stage milestone vocabulary with Sandra and the floor leads",
+     "ownerIds": [
+      "sandra",
+      "miguel",
+      "pete"
+     ],
+     "ownerLabel": "Sandra + Miguel + Pete",
+     "window": {
+      "label": "Gate +2 wks (projected)",
+      "start": 18,
+      "end": 18,
+      "projected": true
+     },
+     "done": "Six stages named in shop language, photo required at three; signed off by the floor leads, not imposed on them.",
+     "detail": "If the floor leads don't own the vocabulary, compliance dies in month two. No dates in v1 \u2014 the Skeptic's condition."
+    },
+    {
+     "id": "s4",
+     "text": "Pilot with 5 named repeat customers for one full job cycle",
+     "ownerIds": [
+      "sandra",
+      "dana"
+     ],
+     "ownerLabel": "Sandra (customer contact) \u00b7 Dana (data)",
+     "window": {
+      "label": "Gate +3\u201310 wks (projected)",
+      "start": 19,
+      "end": 26,
+      "projected": true
+     },
+     "done": "All 5 pilot jobs completed with portal live; exit interviews done; pilot customers' inbound status calls counted against their own history.",
+     "detail": "Chosen from the referral-source list; told it's a pilot, asked for blunt feedback."
+    },
+    {
+     "id": "s5",
+     "text": "Pilot review: rollout, iterate, or hold",
+     "ownerIds": [
+      "ray",
+      "junto"
+     ],
+     "ownerLabel": "Ray + Junto (retainer check-in)",
+     "window": {
+      "label": "Gate +11 wks (projected)",
+      "start": 27,
+      "end": 27,
+      "projected": true
+     },
+     "done": "A written go/iterate/hold decision with the three pilot metrics (call volume, feedback, floor compliance) attached.",
+     "detail": "Explicit hold option; rollout is earned, not assumed."
+    }
+   ],
+   "metrics": {
+    "objective": [
+     {
+      "id": "m-calls",
+      "kpi": "Inbound status calls per week",
+      "unit": "/wk",
+      "baseline": 31,
+      "target": 10,
+      "direction": "down",
+      "detail": "Front-office call log"
+     },
+     {
+      "id": "m-latency",
+      "kpi": "Milestone update latency",
+      "unit": "days",
+      "baseline": 5,
+      "target": 1,
+      "direction": "down",
+      "detail": "Stage change \u2192 portal update (baseline = current ad-hoc callback lag)"
+     },
+     {
+      "id": "m-adopt",
+      "kpi": "Pilot customer portal adoption",
+      "unit": "%",
+      "baseline": 0,
+      "target": 80,
+      "direction": "up",
+      "detail": "% of pilot customers logging in \u22652\u00d7 during their job"
+     }
+    ],
+    "subjective": [
+     {
+      "kpi": "Customer sentiment on communication",
+      "detail": "Review mentions + pilot exit interviews"
+     },
+     {
+      "kpi": "Front-office Friday load",
+      "detail": "Sandra's self-report \u2014 Fridays are the call-storm day"
+     }
+    ]
+   },
+   "dependencies": [
+    {
+     "id": "rec-costing",
+     "type": "depends on"
+    }
+   ],
+   "risks": [
+    "Stale portal data is customer-visible failure \u2014 mitigated by the compliance gate and milestone-only design.",
+    "Photo milestones add floor workload; kept to three of six stages deliberately.",
+    "Both shortlist vendors are venture-backed \u2014 re-verify vendor health at decision time (Skeptic flag)."
+   ],
+   "tools": [
+    {
+     "name": "Portal: Buildertrend (selected candidate) vs. JobTread (runner-up)",
+     "status": "VERIFIED",
+     "note": "Both GA with production references in custom shops; final selection at step 2, pricing re-verified at signature."
+    },
+    {
+     "name": "AI update drafting from job-stage data",
+     "status": "VERIFIED",
+     "note": "Template-constrained generation; human approval gate per Skeptic condition."
+    }
+   ]
+  },
+  {
+   "id": "rec-knowledge",
+   "num": "04",
+   "title": "Institutional Knowledge Capture \u2014 Before Gus Retires",
+   "shortTitle": "Knowledge Capture",
+   "phase": "p3",
+   "signal": "recommend",
+   "summary": "Gus holds thirty years of build methods, supplier quirks, and 'why we do it this way' \u2014 and he retires in roughly eighteen months. This program turns his walkthroughs into a searchable shop knowledge base: recorded sessions, AI-transcribed and structured, linked to the job types and line items from Sheets 01\u201302.",
+   "summaryShort": "Turn Gus's thirty years into a searchable shop knowledge base before he retires.",
+   "whyNow": "Phase 3 on the calendar, but the clock is Gus's, not ours. Recording starts in Phase 1 (it costs almost nothing); the structuring and search build waits for the job-data spine from Sheet 02.",
+   "impact": [
+    {
+     "value": "18 mo",
+     "label": "Stated time to Gus's retirement (verified \u2014 his own words)",
+     "tag": "verified"
+    },
+    {
+     "value": "\u2248 6 wks",
+     "label": "Ramp time for a new lead without documented methods (estimated from last hire)",
+     "tag": "estimated"
+    },
+    {
+     "value": "1 \u2192 many",
+     "label": "Bus factor on custom build methods",
+     "tag": "estimated"
+    }
+   ],
+   "costs": {
+    "implementation": "$7\u201311K",
+    "ongoing": "$100\u2013200/mo",
+    "time": "Recording: ongoing from Phase 1 \u00b7 Build: 6\u20138 weeks in Phase 3",
+    "pricingAsOf": "Jul 2026"
+   },
+   "evaluation": {
+    "operator": {
+     "verdict": "ADOPT",
+     "score": 7,
+     "reason": "Lightest-touch change in the set \u2014 Gus talks while he works, which he already does for free. The risk isn't adoption, it's that recording feels like being measured; the framing in the kickoff matters more than the tooling."
+    },
+    "skeptic": {
+     "verdict": "ADOPT",
+     "score": 8,
+     "reason": "The counterfactual is catastrophic and uninsurable: this knowledge currently exists in exactly one place. Almost any capture beats none, and the downside of the program itself is a few thousand dollars of transcription."
+    },
+    "champion": {
+     "verdict": "ADOPT",
+     "score": 7,
+     "reason": "Solid defensive value and it feeds training for future hires \u2014 but it's preservation, not offense. I'd fund it without hesitation and spend my persuasion elsewhere."
+    },
+    "agreement": "consensus",
+    "crux": "",
+    "resolution": "Unanimous adopt. The panel's shared note: start the recordings now \u2014 the build can wait, Gus's tenure can't.",
+    "resolutionVerdict": "ADOPT"
+   },
+   "steps": [
+    {
+     "id": "s1",
+     "text": "Kickoff lunch with Gus: legacy framing, his curation rights, his name on it",
+     "ownerIds": [
+      "ray"
+     ],
+     "ownerLabel": "Ray (only Ray)",
+     "window": {
+      "label": "Week 2",
+      "start": 2,
+      "end": 2
+     },
+     "done": "Gus has agreed, knows he curates what goes in, and the first session is on the calendar.",
+     "detail": "The Operator's framing note: this is 'the Gus Method library.' Coming from anyone but Ray, it reads as HR."
+    },
+    {
+     "id": "s2",
+     "text": "Weekly 30-minute recorded walkthroughs during normal work",
+     "ownerIds": [
+      "gus",
+      "sandra"
+     ],
+     "ownerLabel": "Gus (talks) \u00b7 Sandra (calendar + upload)",
+     "window": {
+      "label": "Weekly from Week 3",
+      "start": 3,
+      "end": null
+     },
+     "done": "Session counter increments weekly; 8+ sessions banked by end of Phase 1, 40+ before retirement.",
+     "detail": "Phone on a mount, no production overhead. The counter is reviewed at every retainer check-in \u2014 this is the step that silently dies without an owner.",
+     "howto": {
+      "time": "30 min/week + 5 min upload",
+      "difficulty": "A phone on a mount and a calendar habit",
+      "prereqs": [
+       "Any recent phone with 20+ GB free, on the magnetic mount by Gus's bench",
+       "A recurring Wednesday 2pm slot on the shop calendar titled 'Gus Method \u2014 session N'",
+       "A shared drive folder 'Gus Method / Raw' that Sandra owns"
+      ],
+      "steps": [
+       "Pick this week's topic from whatever Gus is genuinely working on \u2014 never stage a demo. Real work reads better and costs nothing.",
+       "Sandra starts the recording in landscape, frames Gus's hands and the workpiece, says the date and topic out loud, then leaves.",
+       "Gus works and narrates like he's training Miguel: what he's doing, what he's feeling for, what would go wrong if you rushed it. 30 minutes max \u2014 stop mid-task if needed, part 2 next week.",
+       "Sandra uploads same day, names it 'NN \u2014 topic \u2014 YYYY-MM-DD', and increments the counter on the folder's cover sheet.",
+       "Once a month, Gus picks his favorite session so far \u2014 that's the curation habit starting early, and it keeps it his."
+      ],
+      "goodLooksLike": "The counter goes up every week without anyone chasing anyone, and Gus starts saying 'get the camera' on his own when something interesting hits the bench.",
+      "snags": [
+       {
+        "symptom": "Gus goes quiet on camera",
+        "fix": "Put Miguel in the shot as the audience. Gus teaches people, not phones \u2014 the narration returns instantly."
+       },
+       {
+        "symptom": "A crazy week, session skipped",
+        "fix": "Skip it, don't stack it. Two sessions in one week reads as a chore; the streak matters less than the habit."
+       }
+      ]
+     }
+    },
+    {
+     "id": "s3",
+     "text": "AI-transcribe and tag all banked sessions against the Sheet 02 job-type taxonomy",
+     "ownerIds": [
+      "partner"
+     ],
+     "ownerLabel": "Implementation partner (transcription + tagging)",
+     "window": {
+      "label": "Wks 36\u201337",
+      "start": 36,
+      "end": 37
+     },
+     "done": "Every banked session transcribed, tagged, and searchable by job type; tagging spot-checked by Gus for 5 sessions.",
+     "detail": "Junto writes the tagging spec; the partner executes it. Tagging waits for the taxonomy; transcripts bank value in the meantime."
+    },
+    {
+     "id": "s4",
+     "text": "Build the knowledge base, linked from quote line items to relevant methods",
+     "ownerIds": [
+      "partner",
+      "gus"
+     ],
+     "ownerLabel": "Implementation partner (build) \u00b7 Gus (curation pass)",
+     "window": {
+      "label": "Wks 38\u201341",
+      "start": 38,
+      "end": 41
+     },
+     "done": "From any quote line item in the desk, one click reaches the relevant Gus walkthrough; Gus has approved the top-20 most-linked entries.",
+     "detail": "An estimator quoting a job type sees the method for it \u2014 Sheets 01 and 04 shake hands. Junto signs off against the acceptance criterion."
+    },
+    {
+     "id": "s5",
+     "text": "Run the next new-hire onboarding against the knowledge base; measure ramp time",
+     "ownerIds": [
+      "miguel",
+      "dana"
+     ],
+     "ownerLabel": "Miguel (supervises hire) \u00b7 Dana (measures)",
+     "window": {
+      "label": "Next hire after go-live",
+      "start": 42,
+      "end": 47,
+      "projected": true
+     },
+     "done": "Ramp time recorded (hire date \u2192 unsupervised on standard builds) and compared to the 6-week baseline in writing.",
+     "detail": "The real test: does 6 weeks become 3?"
+    }
+   ],
+   "metrics": {
+    "objective": [
+     {
+      "id": "m-sessions",
+      "kpi": "Walkthrough sessions banked",
+      "unit": "",
+      "baseline": 0,
+      "target": 40,
+      "direction": "up",
+      "detail": "Count \u00b7 target before Gus's retirement date"
+     },
+     {
+      "id": "m-coverage",
+      "kpi": "Job types with linked method coverage",
+      "unit": "%",
+      "baseline": 0,
+      "target": 80,
+      "direction": "up",
+      "detail": "% of active job-type taxonomy with \u22651 walkthrough"
+     },
+     {
+      "id": "m-ramp",
+      "kpi": "New-hire ramp time",
+      "unit": "wks",
+      "baseline": 6,
+      "target": 3,
+      "direction": "down",
+      "detail": "Hire \u2192 unsupervised on standard builds \u00b7 next hire vs. baseline"
+     }
+    ],
+    "subjective": [
+     {
+      "kpi": "Gus's engagement with the program",
+      "detail": "Volunteering sessions or being chased? \u00b7 Sandra's read, monthly"
+     }
+    ]
+   },
+   "dependencies": [
+    {
+     "id": "rec-costing",
+     "type": "depends on"
+    }
+   ],
+   "risks": [
+    "Gus experiences recording as surveillance or replacement \u2014 the legacy framing and curation rights are the mitigation.",
+    "Recordings pile up untranscribed and the program silently dies \u2014 Sandra's calendar ownership and the session counter guard this.",
+    "Retirement timeline moves up; recordings starting in Phase 1 hedge exactly this."
+   ],
+   "tools": [
+    {
+     "name": "AI transcription + structuring",
+     "status": "VERIFIED",
+     "note": "Commodity capability; multiple GA options (research log, domain 4)."
+    },
+    {
+     "name": "Knowledge base platform",
+     "status": "UNVERIFIED",
+     "note": "Selection deferred to Phase 3 by design \u2014 choosing now guarantees choosing stale."
+    }
+   ]
+  }
+ ],
+ "futureConsiderations": [
+  {
+   "title": "CNC nesting optimization",
+   "note": "Real material-waste upside, but requires machine-file standardization the shop doesn't have yet. Trigger: Sheet 02 shows material variance by job type."
+  },
+  {
+   "title": "AI-assisted design mockups for customer approvals",
+   "note": "The Champion's favorite deferred item. Trigger: portal adoption proves customers engage digitally."
+  },
+  {
+   "title": "Second shift scheduling model",
+   "note": "Raised in discovery; a capacity strategy question, not an AI gap. Revisit at the 12-month retainer review."
+  }
+ ]
+};
+
+(function(){
+const root=document.getElementById('view-root');
+if(!DREAM_DATA){
+  root.innerHTML='<div class="sheet"><div class="sheet-inner"><h1>No engagement data</h1><p style="margin-top:10px">This is the empty template. Inject the engagement JSON in place of the <span class="mono">__DREAM_DATA__</span> token (see dream_schema.md).</p></div></div>';
+  return;
+}
+const D=DREAM_DATA;
+const esc=(s)=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const trunc=(s,n)=>s.length>n?s.slice(0,n-1)+'…':s;
+const recById=Object.fromEntries(D.recommendations.map(r=>[r.id,r]));
+const recOrder=D.recommendations.map(r=>r.id);
+const personById=Object.fromEntries((D.people||[]).map(p=>[p.id,p]));
+const gatesByRec={};(D.gates||[]).forEach(g=>{(gatesByRec[g.recId]=gatesByRec[g.recId]||[]).push(g);});
+
+/* ---------- state ---------- */
+const LS_KEY='junto-dream-'+(D.meta.slug||'client');
+let S={steps:{},gates:{},metrics:{},notes:{},lastExport:null};
+let __hasSaved=false;
+try{const raw=localStorage.getItem(LS_KEY); if(raw){S=Object.assign(S,JSON.parse(raw));__hasSaved=true;}}catch(e){}
+if(!__hasSaved){/* SAMPLE seed — only for first-time visitors, so the dashboard shows a plan in motion */
+  const __t=Date.now();
+  S.steps={'rec-quote::s1':{done:true,at:__t},'rec-quote::s2':{done:true,at:__t},'rec-knowledge::s1':{done:true,at:__t}};
+  S.metrics={'m-turnaround':{actual:6},'m-quotevol':{actual:7}};
+}
+const save=()=>{try{localStorage.setItem(LS_KEY,JSON.stringify(S));}catch(e){}};
+const stepKey=(rid,sid)=>rid+'::'+sid;
+const isDone=(rid,sid)=>!!(S.steps[stepKey(rid,sid)]&&S.steps[stepKey(rid,sid)].done);
+const recProgress=(r)=>{const t=r.steps.length;if(!t)return 0;return Math.round(100*r.steps.filter(s=>isDone(r.id,s.id)).length/t);};
+const totalSteps=()=>D.recommendations.reduce((a,r)=>a+r.steps.length,0);
+const totalDone=()=>D.recommendations.reduce((a,r)=>a+r.steps.filter(s=>isDone(r.id,s.id)).length,0);
+function currentWeek(){
+  const t0=new Date(D.meta.engagementStartDate+'T00:00:00');
+  const NOW=new Date('2026-08-17T12:00:00').getTime();/* SAMPLE: clock pinned to Week 4 so it never drifts */
+  const w=Math.floor((NOW-t0.getTime())/(7*24*3600*1000))+1;
+  return Math.max(1,w);
+}
+const CW=currentWeek();
+const horizon=Math.max(...D.phases.map(p=>p.endWeek),CW+4);
+
+/* ---------- chips ---------- */
+const vChip=(v)=>'<span class="chip v-'+esc(v)+'">'+esc(v)+'</span>';
+const sigChip=(s)=>{const c=s==='strong recommend'?'sig-strong':s==='recommend'?'sig-rec':'sig-cond';return '<span class="sig '+c+'">'+esc(s)+'</span>';};
+const agreeChip=(a)=>'<span class="agree agree-'+esc(a)+'">'+esc(a)+'</span>';
+const tagChip=(t)=>'<span class="chip tag-'+esc(String(t).toLowerCase())+'">'+esc(t)+'</span>';
+const vColor=(v)=>({CHAMPION:'#C2963B',ADOPT:'#1E3A5F',CONDITIONS:'#b28a2e',DEFER:'#8a8471',REJECT:'#BF5B2D'}[v]||'#8a8471');
+
+/* ---------- nav ---------- */
+const VIEWS=[['dash','DASHBOARD'],['story','THE STORY'],['plan','THE PLAN'],['people','PEOPLE'],['timeline','TIMELINE'],['score','SCOREBOARD'],['checkin','CHECK-IN']];
+let curView='story',curSheet=null;
+function renderNav(){
+  let h='<span class="brand">JUNTO · '+esc(D.meta.client.toUpperCase())+'</span>';
+  VIEWS.forEach(([id,lbl])=>{h+='<button class="tab'+(curView===id?' active':'')+'" onclick="go(\''+id+'\')">'+lbl+'</button>';});
+  h+='<span class="nav-spacer"></span><span class="wk-badge">WEEK '+CW+'</span>';
+  document.getElementById('nav-in').innerHTML=h;
+}
+
+/* ---------- shared: section label ---------- */
+const sec=(tag,title)=>'<div class="section-label"><span class="tag">'+tag+'</span><h2>'+esc(title)+'</h2><span class="rule"></span></div>';
+
+/* ---------- STORY ---------- */
+function systemMapSVG(){
+  const phases=D.phases,recs=D.recommendations;
+  const colW=300,headH=34,nodeH=54,gapY=22,padX=26;
+  const byPhase=phases.map(p=>recs.filter(r=>r.phase===p.id));
+  const maxRows=Math.max(...byPhase.map(a=>a.length),1);
+  const W=phases.length*colW,H=headH+maxRows*(nodeH+gapY)+18;
+  const pos={};
+  byPhase.forEach((arr,ci)=>arr.forEach((r,ri)=>{pos[r.id]={x:ci*colW+padX,y:headH+ri*(nodeH+gapY),w:colW-2*padX,h:nodeH};}));
+  let s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="min-width:'+Math.min(W,900)+'px;width:100%">';
+  s+='<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3E5C82"/></marker></defs>';
+  phases.forEach((p,ci)=>{
+    s+='<text class="phase-lbl" x="'+(ci*colW+padX)+'" y="18">'+esc((p.name+' · '+p.window).toUpperCase())+'</text>';
+    if(ci>0)s+='<line class="phase-line" x1="'+(ci*colW)+'" y1="6" x2="'+(ci*colW)+'" y2="'+(H-6)+'"/>';
+  });
+  (D.connections||[]).forEach(c=>{
+    const a=pos[c.from],b=pos[c.to];if(!a||!b)return;
+    const x1=a.x+a.w,y1=a.y+a.h/2,x2=b.x,y2=b.y+b.h/2,mx=(x1+x2)/2;
+    s+='<path class="edge" d="M'+x1+','+y1+' C'+mx+','+y1+' '+mx+','+y2+' '+(x2-3)+','+y2+'"/>';
+    if(c.label)s+='<text class="edge-lbl" x="'+mx+'" y="'+((y1+y2)/2-6)+'" text-anchor="middle">'+esc(c.label)+'</text>';
+  });
+  recs.forEach(r=>{
+    const p=pos[r.id];
+    s+='<g class="node" onclick="goSheet(\''+r.id+'\')"><rect x="'+p.x+'" y="'+p.y+'" width="'+p.w+'" height="'+p.h+'"/>';
+    s+='<rect x="'+p.x+'" y="'+p.y+'" width="5" height="'+p.h+'" fill="'+vColor(r.evaluation.resolutionVerdict||'ADOPT')+'" stroke="none"/>';
+    s+='<text class="n-num" x="'+(p.x+14)+'" y="'+(p.y+18)+'">SHEET '+esc(r.num)+'</text>';
+    s+='<text x="'+(p.x+14)+'" y="'+(p.y+37)+'" font-weight="600">'+esc(r.shortTitle||r.title)+'</text></g>';
+  });
+  return s+'</svg>';
+}
+function renderStory(){
+  const m=D.meta,n=D.narrative;
+  let h='<div class="sheet"><div class="titleblock"><div class="titleblock-main">';
+  h+='<div class="firm">Junto Advisory</div><h1>'+esc(m.projectTitle)+'</h1><div class="sub">'+esc(m.subtitle||'')+'</div></div>';
+  h+='<div class="titleblock-meta">';
+  h+='<div><span class="k">Client</span>'+esc(m.client)+'</div>';
+  h+='<div><span class="k">Issued</span>'+esc(m.date)+'</div>';
+  h+='<div><span class="k">Prepared by</span>'+esc(m.preparedBy)+'</div>';
+  h+='<div><span class="k">Set</span>'+esc(m.setId)+' · '+D.recommendations.length+' sheets</div>';
+  h+='<div><span class="k">Engagement clock</span>Week '+CW+' · started '+esc(m.engagementStartDate)+'</div>';
+  h+='</div></div><div class="sheet-inner">';
+  h+=sec('A','The Pattern We Found');
+  h+='<div class="dynamic"><div><h3>'+esc(n.coreDynamic.title)+'</h3>';
+  n.coreDynamic.body.forEach(p=>h+='<p>'+esc(p)+'</p>');
+  h+='</div><div>';
+  if(n.quote)h+='<blockquote>&ldquo;'+esc(n.quote.text)+'&rdquo;<cite>'+esc(n.quote.attribution)+'</cite></blockquote>';
+  h+='</div></div>';
+  h+=sec('B','The Contrast That Matters');
+  const c=n.financialContrast;
+  h+='<div class="contrast"><div class="cell"><div class="num">'+esc(c.a.value)+'</div><div class="lbl">'+esc(c.a.label)+'</div></div><div class="vs">VS</div><div class="cell"><div class="num">'+esc(c.b.value)+'</div><div class="lbl">'+esc(c.b.label)+'</div></div></div>';
+  if(c.note)h+='<div class="contrast-note">'+esc(c.note)+'</div>';
+  if(n.journey){
+    h+=sec('C','Two Tuesdays');
+    h+='<div class="journey"><div class="j-col"><h3>'+esc(n.journey.today.title)+'</h3>';
+    n.journey.today.moments.forEach(mm=>h+='<div class="j-moment">'+esc(mm)+'</div>');
+    h+='</div><div class="j-col"><h3>'+esc(n.journey.after.title)+'</h3>';
+    n.journey.after.moments.forEach(mm=>h+='<div class="j-moment">'+esc(mm)+'</div>');
+    h+='</div></div>';
+    if(n.journey.note)h+='<div class="j-note">'+esc(n.journey.note)+'</div>';
+  }
+  h+=sec('D','How the Work Connects');
+  h+='<div class="mapbox">'+systemMapSVG()+'</div>';
+  h+='<div class="maphint">Arrows read "enables." Click any node to open its sheet.</div>';
+  h+='<div style="margin-top:34px;display:flex;gap:12px;flex-wrap:wrap">';
+  h+='<button class="navbtn btn-solid" onclick="go(\'plan\')">OPEN THE PLAN →</button>';
+  h+='<button class="navbtn" onclick="go(\'checkin\')">THIS MONTH\'S CHECK-IN</button></div>';
+  h+='<div class="foot">'+esc(m.footnote||'')+' Pricing and vendor capabilities verified as of '+esc(m.researchAsOf||m.date)+'; confirm terms before committing spend. Your progress lives in this browser — save a progress file from the Check-in tab before switching devices.</div>';
+  h+='</div></div>';
+  return h;
+}
+
+/* ---------- PLAN (index) ---------- */
+function renderPlan(){
+  let h='<div class="sheet"><div class="sheet-inner">';
+  h+='<div class="kicker">The Plan</div><h1 style="font-size:36px">Sheet Index</h1>';
+  h+='<p class="muted" style="margin-top:8px;max-width:70ch">Each sheet is one recommendation: the case for it, how the evaluation panel stress-tested it, and the step-by-step work with owners and acceptance criteria.</p>';
+  h+='<div style="margin-top:24px"></div>';
+  h+='<table class="index"><thead><tr><th>No.</th><th>Recommendation</th><th>Phase</th><th>Panel</th><th>Signal</th><th>Progress</th></tr></thead><tbody>';
+  D.recommendations.forEach(r=>{
+    const e=r.evaluation,pct=recProgress(r),ph=D.phases.find(p=>p.id===r.phase);
+    h+='<tr class="rowlink" onclick="goSheet(\''+r.id+'\')"><td class="idx-num">'+esc(r.num)+'</td>';
+    h+='<td><div class="idx-title">'+esc(r.title)+'</div><div class="small muted">'+esc(r.summaryShort||'')+'</div></td>';
+    h+='<td class="mono" style="font-size:12px">'+esc(ph?ph.name:'')+'</td><td title="Operator / Skeptic / Champion">';
+    ['operator','skeptic','champion'].forEach(k=>{h+='<span class="verdict-mini" style="background:'+vColor(e[k].verdict)+'"></span>';});
+    h+='<div style="margin-top:6px">'+agreeChip(e.agreement)+'</div></td>';
+    h+='<td>'+sigChip(r.signal)+'</td>';
+    h+='<td><span class="progress-track"><span class="progress-fill" style="width:'+pct+'%"></span></span><span class="pct">'+pct+'%</span></td></tr>';
+  });
+  h+='</tbody></table>';
+  if(D.futureConsiderations&&D.futureConsiderations.length){
+    h+=sec('F','Held for Later');
+    h+='<div class="future">';
+    D.futureConsiderations.forEach(f=>{h+='<div class="fitem"><b>'+esc(f.title)+'</b> — '+esc(f.note)+'</div>';});
+    h+='</div>';
+  }
+  h+='</div></div>';
+  return h;
+}
+
+/* ---------- PLAN (detail sheet) ---------- */
+function renderSheet(id){
+  const r=recById[id];if(!r)return renderPlan();
+  const e=r.evaluation,ph=D.phases.find(p=>p.id===r.phase),idx=recOrder.indexOf(id);
+  let h='<div class="sheet"><div class="sheet-inner">';
+  h+='<div class="sheet-head"><div class="big-num">'+esc(r.num)+'</div><div style="flex:1">';
+  h+='<div class="kicker">'+esc(ph?ph.name+' · '+ph.window:'')+'</div><h1>'+esc(r.title)+'</h1>';
+  h+='<div class="headtags">'+sigChip(r.signal)+agreeChip(e.agreement)+'</div></div></div>';
+  h+='<p style="font-size:17px;max-width:70ch">'+esc(r.summary)+'</p>';
+  if(r.whyNow)h+='<div class="why"><b>Why now</b>'+esc(r.whyNow)+'</div>';
+  (gatesByRec[r.id]||[]).forEach(g=>{
+    const gs=(S.gates[g.id]||{}).status||'pending';
+    h+='<div class="gatecard"><div class="g-title">⛩ Gate — '+esc(g.title)+' · status: '+esc(gs.toUpperCase())+'</div>';
+    h+='<div class="g-crit">'+esc(g.criterion)+'</div>';
+    h+='<div class="g-branch">If met → '+esc(g.ifMet)+' · If missed → '+esc(g.ifMissed)+' · <span class="mono" style="font-size:11px">'+esc(g.source)+'</span></div></div>';
+  });
+  h+=sec('1','Expected Impact');
+  h+='<div class="stats">';
+  r.impact.forEach(st=>{h+='<div class="stat"><div class="val">'+esc(st.value)+'</div><div class="lb">'+esc(st.label)+'</div>'+tagChip(st.tag)+'</div>';});
+  h+='</div><div class="costline"><span>IMPLEMENTATION <b>'+esc(r.costs.implementation)+'</b></span><span>ONGOING <b>'+esc(r.costs.ongoing)+'</b></span><span>TIMELINE <b>'+esc(r.costs.time)+'</b></span><span>PRICING AS OF <b>'+esc(r.costs.pricingAsOf)+'</b></span></div>';
+  h+=sec('2','How the Panel Saw It');
+  h+='<div class="panel">';
+  [['operator','The Operator','Will the team still use this in a year?'],['skeptic','The Skeptic','What could this cost us if it goes wrong?'],['champion','The Champion','What does this unlock if it works?']].forEach(([k,name,axis])=>{
+    const p=e[k];
+    h+='<div class="persp"><div class="p-title">Perspective</div><div class="p-name">'+name+'</div><div class="p-axis">'+axis+'</div>';
+    h+='<div>'+vChip(p.verdict)+'</div><div class="p-score">score '+esc(p.score)+' / 10 on its axis</div><div class="p-reason">'+esc(p.reason)+'</div>';
+    if(p.condition)h+='<div class="p-reason" style="color:#7a5b16"><b>Condition:</b> '+esc(p.condition)+'</div>';
+    h+='</div>';
+  });
+  h+='</div><div class="resolution"><div class="r-head">'+agreeChip(e.agreement)+'<span class="mono" style="font-size:11px;color:#6d6858">RESOLUTION RECORD</span></div>';
+  if(e.crux)h+='<div class="crux"><b>The crux</b>'+esc(e.crux)+'</div>';
+  h+='<div class="call"><b>'+(e.agreement==='consensus'?'Panel position':'Consultant decision')+'</b>'+esc(e.resolution)+'</div></div>';
+  h+=sec('3','Implementation Steps');
+  const pct=recProgress(r);
+  h+='<div class="steps"><div class="steps-progress"><span>PROGRESS</span><span class="progress-track"><span class="progress-fill" style="width:'+pct+'%"></span></span><span>'+pct+'%</span></div>';
+  r.steps.forEach(s=>{
+    const ck=isDone(r.id,s.id);
+    h+='<div class="step'+(ck?' done':'')+'"><input type="checkbox" '+(ck?'checked':'')+' onchange="toggleStep(\''+r.id+'\',\''+s.id+'\')">';
+    h+='<div style="flex:1"><div class="s-text" onclick="toggleStep(\''+r.id+'\',\''+s.id+'\')">'+esc(s.text)+'</div>';
+    h+='<div class="s-meta">'+esc([s.ownerLabel,s.window.label].filter(Boolean).join(' · '))+(s.window.projected?' · PROJECTED':'')+'</div>';
+    if(s.detail)h+='<div class="s-detail">'+esc(s.detail)+'</div>';
+    if(s.done)h+='<div class="s-done"><b>DONE MEANS</b> '+esc(s.done)+'</div>';
+    if(s.howto)h+=renderHowto(r,s);
+    h+='</div></div>';
+  });
+  h+='</div>';
+  h+=sec('4','How We\'ll Know It Worked');
+  h+='<div class="metrics"><div class="metric-col"><div class="m-head">Objective KPIs — tracked on the Scoreboard</div>';
+  r.metrics.objective.forEach(m=>{
+    const act=(S.metrics[m.id]||{}).actual;
+    h+='<div class="metric"><div class="m-kpi">'+esc(m.kpi)+'</div><div class="m-sub">'+esc(m.detail)+' · baseline '+esc(m.baseline)+' '+esc(m.unit||'')+' → target '+esc(m.target)+' '+esc(m.unit||'')+(act!=null?' · <b>latest: '+esc(act)+'</b>':'')+'</div></div>';
+  });
+  h+='</div><div class="metric-col"><div class="m-head">Subjective indicators — self-reported</div>';
+  r.metrics.subjective.forEach(m=>{h+='<div class="metric"><div class="m-kpi">'+esc(m.kpi)+'</div><div class="m-sub">'+esc(m.detail)+'</div></div>';});
+  h+='</div></div>';
+  h+=sec('5','Dependencies, Risks & Tooling');
+  h+='<div class="two-col"><div><div class="kicker">Depends on / enables</div><ul class="plain">';
+  if((r.dependencies||[]).length===0)h+='<li>Stands alone — no upstream dependencies.</li>';
+  (r.dependencies||[]).forEach(d=>{
+    const dep=recById[d.id];
+    h+='<li><span class="dep-chip" onclick="goSheet(\''+d.id+'\')">Sheet '+esc(dep?dep.num:'')+' — '+esc(dep?dep.shortTitle||dep.title:'')+'</span> <span class="muted">('+esc(d.type)+')</span></li>';
+  });
+  h+='</ul><div class="kicker" style="margin-top:20px">Risks the panel flagged</div><ul class="plain">';
+  (r.risks||[]).forEach(k=>h+='<li>'+esc(k)+'</li>');
+  h+='</ul></div><div><div class="kicker">Tooling</div>';
+  (r.tools||[]).forEach(t=>{h+='<div class="toolrow"><span><b>'+esc(t.name)+'</b> <span class="muted">— '+esc(t.note)+'</span></span>'+tagChip(t.status)+'</div>';});
+  h+='</div></div>';
+  h+='<div style="display:flex;justify-content:space-between;margin-top:44px">';
+  h+= idx>0?'<button class="navbtn" onclick="goSheet(\''+recOrder[idx-1]+'\')">← SHEET '+esc(recById[recOrder[idx-1]].num)+'</button>':'<button class="navbtn" onclick="go(\'plan\')">← INDEX</button>';
+  h+= idx<recOrder.length-1?'<button class="navbtn" onclick="goSheet(\''+recOrder[idx+1]+'\')">SHEET '+esc(recById[recOrder[idx+1]].num)+' →</button>':'<button class="navbtn" onclick="go(\'plan\')">INDEX →</button>';
+  h+='</div>';
+  h+='<div class="foot">'+esc(D.meta.client)+' · '+esc(D.meta.setId)+' · Sheet '+esc(r.num)+' of '+recOrder.length+'. Evaluation records shown as produced by the three-perspective panel; the resolution note records how disagreement was settled.</div>';
+  h+='</div></div>';
+  return h;
+}
+
+/* ---------- HOW-TO drawers ---------- */
+const openHow=new Set();
+let copiedKey=null;
+function renderHowto(r,s){
+  const key=stepKey(r.id,s.id),hw=s.howto,open=openHow.has(key);
+  let h='<button class="howto-btn" onclick="toggleHow(\''+r.id+'\',\''+s.id+'\')">'+(open?'▴ HIDE HOW-TO':'▾ HOW-TO — STEP-BY-STEP')+'</button>';
+  if(!open)return h;
+  h+='<div class="howto">';
+  if(hw.time||hw.difficulty)h+='<div class="h-meta">'+esc([hw.time?'≈ '+hw.time:'',hw.difficulty].filter(Boolean).join(' · '))+'</div>';
+  if(hw.prereqs&&hw.prereqs.length){h+='<div class="h-sec">Before you start</div><ul class="snags">';hw.prereqs.forEach(p=>h+='<li>☐ '+esc(p)+'</li>');h+='</ul>';}
+  h+='<div class="h-sec">Do this</div><ol>';
+  (hw.steps||[]).forEach(t=>h+='<li>'+esc(t)+'</li>');
+  h+='</ol>';
+  if(hw.goodLooksLike)h+='<div class="h-sec">What good looks like</div><div style="font-size:14px">'+esc(hw.goodLooksLike)+'</div>';
+  if(hw.snags&&hw.snags.length){h+='<div class="h-sec">If you hit a snag</div><ul class="snags">';hw.snags.forEach(sn=>h+='<li><b>'+esc(sn.symptom)+'</b> — '+esc(sn.fix)+'</li>');h+='</ul>';}
+  h+='<div class="h-actions">';
+  h+='<button class="howto-btn" onclick="copyHelper(\''+r.id+'\',\''+s.id+'\')">⧉ COPY AI HELPER PROMPT</button>';
+  h+='<a class="howto-btn" style="text-decoration:none" href="'+helpMailto(r,s)+'">✉ ASK '+esc(D.meta.consultant.name.split(' ')[0].toUpperCase())+'</a>';
+  if(copiedKey===key)h+='<span class="copied">Copied — paste it into Claude (claude.ai) and it will walk you through this step.</span>';
+  h+='</div></div>';
+  return h;
+}
+function helperPrompt(r,s){
+  const hw=s.howto||{};
+  let p='You are a patient, hands-on implementation coach. I am '+s.ownerLabel+' at '+D.meta.client+'. ';
+  p+='I need to complete one step from our advisory blueprint (Sheet '+r.num+' — '+r.title+').\n\n';
+  p+='THE STEP: '+s.text+'\n';
+  p+='DONE MEANS: '+s.done+'\n';
+  if(s.detail)p+='CONTEXT: '+s.detail+'\n';
+  const tools=(r.tools||[]).map(t=>t.name).join('; ');
+  if(tools)p+='SYSTEMS INVOLVED: '+tools+'\n';
+  if(hw.prereqs&&hw.prereqs.length)p+='PREREQUISITES: '+hw.prereqs.join(' | ')+'\n';
+  if(hw.steps&&hw.steps.length)p+='\nTHE PLANNED APPROACH (from our consultant):\n'+hw.steps.map((t,i)=>(i+1)+'. '+t).join('\n')+'\n';
+  if(hw.snags&&hw.snags.length)p+='\nKNOWN SNAGS: '+hw.snags.map(sn=>sn.symptom+' → '+sn.fix).join(' | ')+'\n';
+  p+='\nHOW TO HELP ME: Walk me through this one action at a time. Ask what I can see on my screen before assuming. ';
+  p+='Adapt the planned approach if my software looks different — the DONE MEANS criterion is the goal, not the exact clicks. ';
+  p+='If I get stuck on something the snags list doesn\'t cover, help me draft a short email to our consultant ('+D.meta.consultant.name+', '+D.meta.consultant.email+') describing exactly where we stopped. ';
+  p+='When we finish, check my result against the DONE MEANS line before congratulating me.';
+  return p;
+}
+function helpMailto(r,s){
+  const subj='Help with Sheet '+r.num+' step: '+s.text.slice(0,60)+' — '+D.meta.client;
+  const body='Hi '+D.meta.consultant.name.split(' ')[0]+',\n\nI\'m working on:\n  '+s.text+'\n  (done means: '+s.done+')\n\nWhere I\'m stuck:\n  \n\nWhat I\'ve tried:\n  \n';
+  return 'mailto:'+D.meta.consultant.email+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+}
+window.toggleHow=function(rid,sid){
+  const k=stepKey(rid,sid);
+  if(openHow.has(k))openHow.delete(k);else openHow.add(k);
+  copiedKey=null;render();
+};
+window.copyHelper=function(rid,sid){
+  const r=recById[rid],s=r.steps.find(x=>x.id===sid);
+  const txt=helperPrompt(r,s);
+  const finish=()=>{copiedKey=stepKey(rid,sid);render();};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(finish,()=>{fallbackCopy(txt);finish();});}
+  else{fallbackCopy(txt);finish();}
+};
+function fallbackCopy(txt){
+  const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild&&document.body.appendChild(ta);
+  if(ta.select){ta.select();try{document.execCommand&&document.execCommand('copy');}catch(e){}}
+  if(ta.remove)ta.remove();
+}
+
+/* ---------- PEOPLE ---------- */
+function personSteps(pid){
+  const out=[];
+  D.recommendations.forEach(r=>r.steps.forEach(s=>{
+    if((s.ownerIds||[]).includes(pid))out.push({rec:r,step:s});
+  }));
+  out.sort((a,b)=>(a.step.window.start||99)-(b.step.window.start||99));
+  return out;
+}
+function heaviestLoad(pid){
+  let max=0,maxW=0;
+  for(let w=1;w<=horizon;w++){
+    let n=0;
+    personSteps(pid).forEach(({rec,step})=>{
+      if(step.window.projected)return;
+      if(isDone(rec.id,step.id))return;
+      const s=step.window.start,e=step.window.end==null?horizon:step.window.end;
+      if(s<=w&&w<=e)n++;
+    });
+    if(n>max){max=n;maxW=w;}
+  }
+  return {max,week:maxW};
+}
+function renderPeople(){
+  let h='<div class="sheet"><div class="sheet-inner">';
+  h+='<div class="kicker">People</div><h1 style="font-size:36px">Who Does What</h1>';
+  h+='<p class="muted" style="margin-top:8px;max-width:72ch">Every step in the plan, regrouped by the person who owns it. The load flag marks anyone carrying more than two concurrent open steps in a single week — the change-stacking risk the Operator perspective watches. Print any list as a one-page punch list.</p>';
+  h+='<div style="margin-top:26px"></div>';
+  (D.people||[]).forEach(p=>{
+    const items=personSteps(p.id);if(!items.length)return;
+    const load=heaviestLoad(p.id);
+    h+='<div class="person-card" id="pc-'+esc(p.id)+'"><div class="person-head"><h3>'+esc(p.name)+'</h3><span class="role">'+esc(p.role)+'</span>';
+    h+= load.max>2?'<span class="loadwarn">⚠ '+load.max+' CONCURRENT OPEN STEPS · WK '+load.week+'</span>':'<span class="loadok">LOAD OK · PEAK '+load.max+'</span>';
+    h+='<span class="nav-spacer"></span><button class="navbtn" onclick="printPerson(\''+esc(p.id)+'\')">PRINT LIST</button></div>';
+    items.forEach(({rec,step})=>{
+      const ck=isDone(rec.id,step.id);
+      h+='<div class="p-step'+(ck?' done':'')+'"><input type="checkbox" '+(ck?'checked':'')+' onchange="toggleStep(\''+rec.id+'\',\''+step.id+'\')">';
+      h+='<span class="w">'+esc(step.window.label)+'</span>';
+      h+='<span class="sheetref" onclick="goSheet(\''+rec.id+'\')">'+esc(rec.num)+'</span>';
+      h+='<span class="txt">'+esc(step.text)+(step.howto?'<span class="guide-mark" title="Step-by-step guide on the sheet">GUIDE</span>':'')+'</span></div>';
+    });
+    h+='</div>';
+  });
+  h+='<div class="foot">Checkboxes here and on the sheets are the same state. Load calculation ignores completed and gate-projected steps.</div>';
+  h+='</div></div>';
+  return h;
+}
+
+/* ---------- TIMELINE ---------- */
+function renderTimeline(){
+  const x0=250,W=1060,rowH=24,pw=(W-x0-20)/horizon;
+  const rows=[];
+  D.recommendations.forEach(r=>{
+    rows.push({type:'rec',r});
+    r.steps.forEach(s=>rows.push({type:'step',r,s}));
+  });
+  const H=40+rows.length*rowH+26;
+  let g='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="min-width:960px;width:100%">';
+  D.phases.forEach(p=>{
+    const x=x0+(p.startWeek-1)*pw,w=(p.endWeek-p.startWeek+1)*pw;
+    g+='<rect class="tl-phase" x="'+x+'" y="26" width="'+w+'" height="'+(H-46)+'"/>';
+    g+='<text class="tl-phaselbl" x="'+(x+4)+'" y="20">'+esc(p.name.toUpperCase())+'</text>';
+  });
+  for(let w=1;w<=horizon;w+=4){
+    const x=x0+(w-1)*pw;
+    g+='<line class="tl-grid" x1="'+x+'" y1="26" x2="'+x+'" y2="'+(H-20)+'"/>';
+    g+='<text class="tl-week" x="'+(x+2)+'" y="'+(H-8)+'">W'+w+'</text>';
+  }
+  rows.forEach((row,i)=>{
+    const y=40+i*rowH;
+    if(row.type==='rec'){
+      g+='<text class="tl-rec" x="6" y="'+(y+13)+'">'+esc(row.r.num+' · '+(row.r.shortTitle||'').toUpperCase())+'</text>';
+      (gatesByRec[row.r.id]||[]).forEach(gt=>{
+        const gx=x0+(gt.opensWeek-1)*pw,gy=y+9;
+        const gs=(S.gates[gt.id]||{}).status||'pending';
+        const fill=gs==='met'?'#6E7F5C':gs==='missed'?'#BF5B2D':'#C2963B';
+        g+='<path d="M'+gx+','+(gy-7)+' L'+(gx+7)+','+gy+' L'+gx+','+(gy+7)+' L'+(gx-7)+','+gy+' Z" fill="'+fill+'" stroke="#2B2A26" stroke-width="1"><title>'+esc(gt.title+' — opens wk '+gt.opensWeek+' — '+gs)+'</title></path>';
+      });
+    }else{
+      const s=row.s,st=s.window.start,en=s.window.end==null?horizon:s.window.end;
+      const x=x0+(st-1)*pw,w=Math.max((en-st+1)*pw,7),yc=y+6;
+      g+='<text class="tl-lbl" x="16" y="'+(y+14)+'">'+esc(trunc(s.text,34))+'</text>';
+      const ck=isDone(row.r.id,s.id);
+      if(s.window.projected){
+        g+='<rect x="'+x+'" y="'+yc+'" width="'+w+'" height="10" fill="none" stroke="#8a8471" stroke-width="1.3" stroke-dasharray="4 3"><title>'+esc(s.window.label)+' (gate-dependent)</title></rect>';
+      }else{
+        g+='<rect x="'+x+'" y="'+yc+'" width="'+w+'" height="10" fill="'+(ck?'#6E7F5C':'#1E3A5F')+'" opacity="'+(ck?'0.9':'0.75')+'"><title>'+esc(s.window.label)+(ck?' — done':'')+'</title></rect>';
+        if(s.window.end==null)g+='<text x="'+(x+w+3)+'" y="'+(yc+9)+'" font-size="10" fill="#1E3A5F">→</text>';
+      }
+    }
+  });
+  const tx=x0+(CW-1)*pw;
+  g+='<line class="tl-today" x1="'+tx+'" y1="24" x2="'+tx+'" y2="'+(H-20)+'"/>';
+  g+='<text class="tl-todaylbl" x="'+(tx+4)+'" y="'+(H-24)+'">TODAY · WK '+CW+'</text>';
+  g+='</svg>';
+  let h='<div class="sheet"><div class="sheet-inner">';
+  h+='<div class="kicker">Timeline</div><h1 style="font-size:36px">The Work, on a Calendar</h1>';
+  h+='<p class="muted" style="margin-top:8px;max-width:72ch">Solid bars are committed work (green = done, blue = open). Dashed bars are gate-dependent — they move if a gate decision moves. Diamonds are the gates themselves: ochre = undecided, green = met, terracotta = missed.</p>';
+  h+='<div style="margin-top:22px"></div><div class="tl-box">'+g+'</div>';
+  h+='<div class="foot">Weeks count from the engagement start ('+esc(D.meta.engagementStartDate)+'). Recurring steps run to the horizon with an arrow.</div>';
+  h+='</div></div>';
+  return h;
+}
+
+/* ---------- SCOREBOARD ---------- */
+function metricStatus(m){
+  const rec=S.metrics[m.id];
+  if(!rec||rec.actual==null||rec.actual==='')return ['AWAITING DATA','st-await'];
+  const a=parseFloat(rec.actual);
+  if(isNaN(a))return ['AWAITING DATA','st-await'];
+  if(m.direction==='down'){
+    if(a<=m.target)return ['TARGET MET','st-met'];
+    if(a<m.baseline)return ['MOVING','st-moving'];
+    return ['WATCH','st-watch'];
+  }else{
+    if(a>=m.target)return ['TARGET MET','st-met'];
+    if(a>m.baseline)return ['MOVING','st-moving'];
+    return ['WATCH','st-watch'];
+  }
+}
+function renderScore(){
+  let h='<div class="sheet"><div class="sheet-inner">';
+  h+='<div class="kicker">Scoreboard</div><h1 style="font-size:36px">Baseline → Target → Actual</h1>';
+  h+='<p class="muted" style="margin-top:8px;max-width:72ch">Baselines were measured during discovery; targets were set in the evaluation. Enter your latest actuals — status is computed, not asserted. Bring this filled in to each check-in (or just save a progress file; it comes along).</p>';
+  h+='<div style="margin-top:24px"></div>';
+  h+='<table class="score"><thead><tr><th style="width:34%">KPI</th><th>Baseline</th><th>Target</th><th>Latest actual</th><th>Status</th></tr></thead><tbody>';
+  D.recommendations.forEach(r=>{
+    if(!r.metrics.objective.length)return;
+    h+='<tr class="rec-row"><td colspan="5">Sheet '+esc(r.num)+' — '+esc(r.shortTitle||r.title)+'</td></tr>';
+    r.metrics.objective.forEach(m=>{
+      const val=(S.metrics[m.id]||{}).actual;
+      const [lbl,cls]=metricStatus(m);
+      h+='<tr><td><b>'+esc(m.kpi)+'</b><div class="small muted">'+esc(m.detail)+'</div></td>';
+      h+='<td class="mono">'+esc(m.baseline)+' '+esc(m.unit||'')+'</td>';
+      h+='<td class="mono">'+esc(m.target)+' '+esc(m.unit||'')+' <span class="muted small">('+(m.direction==='down'?'lower':'higher')+' is better)</span></td>';
+      h+='<td><input type="number" step="any" value="'+(val!=null?esc(val):'')+'" onchange="setMetric(\''+esc(m.id)+'\',this.value)"> <span class="mono small muted">'+esc(m.unit||'')+'</span></td>';
+      h+='<td><span class="chip '+cls+'">'+lbl+'</span></td></tr>';
+    });
+  });
+  h+='</tbody></table>';
+  h+='<div class="foot">Subjective indicators (morale, confidence, evenings reclaimed) are reviewed in conversation at check-ins — they don\'t belong in a table.</div>';
+  h+='</div></div>';
+  return h;
+}
+
+/* ---------- CHECK-IN ---------- */
+function stalledSteps(){
+  const out=[];
+  D.recommendations.forEach(r=>r.steps.forEach(s=>{
+    if(s.window.projected)return;
+    if(isDone(r.id,s.id))return;
+    if(s.window.end!=null&&s.window.end<CW)out.push({rec:r,step:s});
+  }));
+  return out;
+}
+function dueNow(){
+  const out=[];
+  D.recommendations.forEach(r=>r.steps.forEach(s=>{
+    if(s.window.projected)return;
+    if(isDone(r.id,s.id))return;
+    const en=s.window.end==null?horizon:s.window.end;
+    if(s.window.start<=CW&&CW<=en)out.push({rec:r,step:s});
+  }));
+  return out;
+}
+function gatesDue(){return (D.gates||[]).filter(g=>g.opensWeek<=CW&&((S.gates[g.id]||{}).status||'pending')==='pending');}
+function completedSince(ts){
+  const out=[];
+  D.recommendations.forEach(r=>r.steps.forEach(s=>{
+    const rec=S.steps[stepKey(r.id,s.id)];
+    if(rec&&rec.done&&(!ts||rec.at>ts))out.push({rec:r,step:s});
+  }));
+  return out;
+}
+function missingMetrics(){
+  const out=[];
+  D.recommendations.forEach(r=>{
+    const ph=D.phases.find(p=>p.id===r.phase);
+    if(ph&&ph.startWeek>CW)return;
+    r.metrics.objective.forEach(m=>{
+      const v=(S.metrics[m.id]||{}).actual;
+      if(v==null||v==='')out.push({rec:r,m});
+    });
+  });
+  return out;
+}
+function renderCheckin(){
+  const stall=stalledSteps(),due=dueNow(),gd=gatesDue(),recent=completedSince(S.lastExport),miss=missingMetrics();
+  const today=new Date().toISOString().slice(0,10);
+  let h='<div class="sheet"><div class="sheet-inner">';
+  h+='<div class="kicker">Check-in</div><h1 style="font-size:36px">Monthly Check-in Prep</h1>';
+  h+='<p class="muted" style="margin-top:8px">Generated '+today+' · engagement week '+CW+'. This page writes the agenda for the session with '+esc(D.meta.consultant.name)+' — nothing to prepare, just keep the checkboxes honest.</p>';
+  h+='<div style="margin-top:22px"></div>';
+  h+='<div class="agenda"><div class="kicker">Suggested agenda</div><ol>';
+  h+='<li><b>'+recent.length+'</b> step'+(recent.length===1?'':'s')+' completed since the last progress save — start with the wins.</li>';
+  h+='<li><b>'+stall.length+'</b> stalled item'+(stall.length===1?'':'s')+' past their window — what\'s blocking, what needs re-planning?</li>';
+  h+='<li><b>'+gd.length+'</b> gate'+(gd.length===1?'':'s')+' now decidable — bring the numbers, make the call.</li>';
+  h+='<li><b>'+miss.length+'</b> scoreboard metric'+(miss.length===1?'':'s')+' awaiting actuals — 10 minutes of data entry buys an honest review.</li>';
+  h+='<li>Your notes below — anything the plan doesn\'t know yet.</li></ol></div>';
+  h+='<div class="ck-grid">';
+  h+='<div class="ck-card"><div class="ck-head">Momentum · '+totalDone()+' of '+totalSteps()+' steps</div><div class="ck-body">';
+  D.phases.forEach(p=>{
+    const rs=D.recommendations.filter(r=>r.phase===p.id);
+    const t=rs.reduce((a,r)=>a+r.steps.length,0),d=rs.reduce((a,r)=>a+r.steps.filter(s=>isDone(r.id,s.id)).length,0);
+    const pct=t?Math.round(100*d/t):0;
+    h+='<div class="ck-item"><span class="mono small">'+esc(p.name)+'</span> <span class="progress-track" style="width:150px;margin-left:10px"><span class="progress-fill" style="width:'+pct+'%"></span></span><span class="pct">'+pct+'%</span></div>';
+  });
+  if(recent.length){h+='<div style="margin-top:10px" class="kicker">Done since last save</div>';recent.slice(0,8).forEach(({rec,step})=>{h+='<div class="ck-item small">✓ '+esc(trunc(step.text,60))+' <span class="ref" onclick="goSheet(\''+rec.id+'\')">'+esc(rec.num)+'</span></div>';});}
+  h+='</div></div>';
+  h+='<div class="ck-card"><div class="ck-head">Needs attention</div><div class="ck-body">';
+  if(!stall.length&&!due.length)h+='<div class="ck-item muted">Nothing overdue. Nothing due this week. Enjoy it.</div>';
+  stall.forEach(({rec,step})=>{h+='<div class="ck-item">⚠ <b>Past window:</b> '+esc(trunc(step.text,54))+' <span class="mono small muted">('+esc(step.window.label)+' · '+esc(step.ownerLabel)+')</span> <span class="ref" onclick="goSheet(\''+rec.id+'\')">'+esc(rec.num)+'</span></div>';});
+  due.forEach(({rec,step})=>{h+='<div class="ck-item">→ <b>In window now:</b> '+esc(trunc(step.text,54))+' <span class="mono small muted">('+esc(step.ownerLabel)+')</span> <span class="ref" onclick="goSheet(\''+rec.id+'\')">'+esc(rec.num)+'</span></div>';});
+  h+='</div></div>';
+  h+='</div>';
+  if(D.gates&&D.gates.length){
+    h+=sec('G','Gates');
+    (D.gates||[]).forEach(g=>{
+      const gs=(S.gates[g.id]||{}).status||'pending';
+      const decidable=g.opensWeek<=CW;
+      h+='<div class="gatecard"><div class="g-title">⛩ '+esc(g.title)+' · gates Sheet '+esc((recById[g.recId]||{}).num||'')+' · '+(decidable?'DECIDABLE NOW':'opens wk '+g.opensWeek)+'</div>';
+      h+='<div class="g-crit">'+esc(g.criterion)+'</div><div class="g-branch">If met → '+esc(g.ifMet)+' · If missed → '+esc(g.ifMissed)+'</div>';
+      h+='<div class="gate-status">';
+      ['pending','met','missed'].forEach(st=>{h+='<button class="navbtn'+(gs===st?' on':'')+'" onclick="setGate(\''+esc(g.id)+'\',\''+st+'\')">'+st.toUpperCase()+'</button>';});
+      h+='</div></div>';
+    });
+  }
+  h+=sec('N','Notes for '+D.meta.consultant.name.split(' ')[0]);
+  D.recommendations.forEach(r=>{
+    h+='<div style="margin-bottom:14px"><div class="kicker">Sheet '+esc(r.num)+' — '+esc(r.shortTitle||r.title)+'</div>';
+    h+='<textarea class="note" placeholder="What the plan doesn\'t know yet — surprises, resistance, ideas…" onchange="setNote(\''+r.id+'\',this.value)">'+esc(S.notes[r.id]||'')+'</textarea></div>';
+  });
+  h+=sec('S','Sync');
+  h+='<div class="syncbox"><p style="font-size:15px;margin-bottom:12px"><b>Before each check-in:</b> click <i>Save progress file</i> and email it to <a href="mailto:'+esc(D.meta.consultant.email)+'?subject='+encodeURIComponent('Progress file — '+D.meta.client)+'" style="color:var(--terracotta)">'+esc(D.meta.consultant.email)+'</a>. That\'s the whole sync — no accounts, nothing installed. The file also backs up your progress if you switch computers (load it back in with the second button).</p>';
+  h+='<button class="navbtn btn-solid" onclick="exportState()">SAVE PROGRESS FILE</button> ';
+  h+='<button class="navbtn" onclick="document.getElementById(\'importfile\').click()">LOAD PROGRESS FILE</button>';
+  h+='<input type="file" id="importfile" accept=".json" style="display:none" onchange="importState(this)">';
+  h+= S.lastExport?'<div class="mono small muted" style="margin-top:10px">Last saved: '+new Date(S.lastExport).toLocaleString()+'</div>':'<div class="mono small muted" style="margin-top:10px">No progress file saved yet.</div>';
+  h+='</div>';
+  h+='<div class="foot">Everything on this page is generated from the plan plus your checkboxes — if it looks wrong, the fastest fix is usually an honest checkbox.</div>';
+  h+='</div></div>';
+  return h;
+}
+
+/* ---------- DASHBOARD ---------- */
+function upNext(){
+  const out=[];
+  D.recommendations.forEach(r=>r.steps.forEach(s=>{
+    if(s.window.projected)return;
+    if(isDone(r.id,s.id))return;
+    if(s.window.start>CW&&s.window.start<=CW+3)out.push({rec:r,step:s});
+  }));
+  out.sort((a,b)=>a.step.window.start-b.step.window.start);
+  return out;
+}
+function scoreHeadlines(){
+  const out=[];let awaiting=0;
+  D.recommendations.forEach(r=>r.metrics.objective.forEach(m=>{
+    const [lbl,cls]=metricStatus(m);
+    if(lbl==='AWAITING DATA'){const ph=D.phases.find(p=>p.id===r.phase);if(ph&&ph.startWeek<=CW)awaiting++;return;}
+    out.push({rec:r,m,lbl,cls,actual:(S.metrics[m.id]||{}).actual});
+  }));
+  const rank={'WATCH':0,'MOVING':1,'TARGET MET':2};
+  out.sort((a,b)=>rank[a.lbl]-rank[b.lbl]);
+  return {items:out.slice(0,6),awaiting};
+}
+function weeklyFocus(stall,gd,due){
+  if(gd.length)return {txt:'A gate is decidable: '+gd[0].title+' — bring the number, make the call.',view:'checkin'};
+  if(stall.length)return {txt:'Unblock first: "'+trunc(stall[0].step.text,58)+'" is past its window ('+stall[0].step.ownerLabel+').',view:'plan',sheet:stall[0].rec.id};
+  if(due.length)return {txt:'This week\'s work: "'+trunc(due[0].step.text,58)+'" ('+due[0].step.ownerLabel+').',view:'plan',sheet:due[0].rec.id};
+  return {txt:'Nothing due, nothing stalled, no gates waiting. Rare air — enjoy it.',view:'plan'};
+}
+function todoRow(rec,step,late){
+  const ck=isDone(rec.id,step.id);
+  let h='<div class="todo-row'+(late?' late':'')+'"><input type="checkbox" '+(ck?'checked':'')+' onchange="toggleStep(\''+rec.id+'\',\''+step.id+'\')">';
+  h+='<div style="flex:1"><span'+(ck?' style="text-decoration:line-through;color:#8a8471"':'')+'>'+esc(step.text)+'</span>';
+  if(late)h+=' <span class="t-flag">PAST WINDOW</span>';
+  h+='<span class="t-meta">'+esc(step.ownerLabel)+' · '+esc(step.window.label)+' · <span class="ref" style="cursor:pointer;text-decoration:underline" onclick="goSheet(\''+rec.id+'\')">Sheet '+esc(rec.num)+'</span></span>';
+  h+='</div></div>';
+  return h;
+}
+function renderDash(){
+  const stall=stalledSteps(),due=dueNow(),next=upNext(),gd=gatesDue();
+  const heads=scoreHeadlines(),focus=weeklyFocus(stall,gd,due);
+  const pct=totalSteps()?Math.round(100*totalDone()/totalSteps()):0;
+  let h='<div class="sheet"><div class="sheet-inner">';
+  h+='<div class="kicker">Dashboard</div><h1 style="font-size:36px;margin-bottom:18px">'+esc(D.meta.client)+' — at a glance</h1>';
+  h+='<div class="dash-banner"><span class="b-week">WEEK '+CW+'</span>';
+  h+='<span class="b-focus" style="cursor:pointer" onclick="'+(focus.sheet?'goSheet(\''+focus.sheet+'\')':'go(\''+focus.view+'\')')+'">'+esc(focus.txt)+'</span>';
+  h+='<span class="b-prog">PLAN '+pct+'%<span class="progress-track"><span class="progress-fill" style="width:'+pct+'%"></span></span></span></div>';
+  h+='<div class="dash-grid">';
+  /* NOW */
+  h+='<div class="ck-card"><div class="ck-head">Now — in window or overdue ('+(due.length+stall.length)+')</div><div class="ck-body">';
+  if(!due.length&&!stall.length)h+='<div class="muted small">Nothing due this week.</div>';
+  stall.forEach(({rec,step})=>h+=todoRow(rec,step,true));
+  due.forEach(({rec,step})=>h+=todoRow(rec,step,false));
+  h+='</div></div>';
+  /* NEXT + gates */
+  h+='<div class="ck-card"><div class="ck-head">Up next — starting within 3 weeks ('+next.length+')</div><div class="ck-body">';
+  if(!next.length)h+='<div class="muted small">Nothing new starts in the next three weeks.</div>';
+  next.forEach(({rec,step})=>h+=todoRow(rec,step,false));
+  if(gd.length){h+='<div class="kicker" style="margin-top:14px">Gate decisions waiting</div>';
+    gd.forEach(g=>{h+='<div class="todo-row"><span style="color:var(--ochre);font-size:15px">⛩</span><div style="flex:1">'+esc(g.title)+'<span class="t-meta">'+esc(g.criterion)+' · <span class="ref" style="cursor:pointer;text-decoration:underline" onclick="go(\'checkin\')">decide in Check-in</span></span></div></div>';});}
+  h+='</div></div>';
+  /* PEOPLE PULSE */
+  h+='<div class="ck-card dash-full"><div class="ck-head">People pulse</div><div class="ck-body"><table class="pulse">';
+  (D.people||[]).forEach(p=>{
+    const items=personSteps(p.id);if(!items.length)return;
+    const done=items.filter(({rec,step})=>isDone(rec.id,step.id)).length;
+    const mine=items.filter(({rec,step})=>{if(step.window.projected||isDone(rec.id,step.id))return false;const en=step.window.end==null?horizon:step.window.end;return step.window.start<=CW&&CW<=en;}).length;
+    const late=items.filter(({rec,step})=>!step.window.projected&&!isDone(rec.id,step.id)&&step.window.end!=null&&step.window.end<CW).length;
+    const ppct=Math.round(100*done/items.length),load=heaviestLoad(p.id);
+    h+='<tr><td style="width:24%"><span class="p-name">'+esc(p.name)+'</span><span class="p-role">'+esc(p.role)+'</span></td>';
+    h+='<td style="width:28%"><span class="progress-track" style="width:130px"><span class="progress-fill" style="width:'+ppct+'%"></span></span><span class="pct">'+done+'/'+items.length+'</span></td>';
+    h+='<td class="mono" style="font-size:11.5px">'+(mine?mine+' due now':'—')+(late?' · <span style="color:var(--terracotta)">'+late+' late</span>':'')+'</td>';
+    h+='<td style="text-align:right">'+(load.max>2?'<span class="loadwarn">⚠ '+load.max+' CONCURRENT · WK '+load.week+'</span>':'<span class="loadok">LOAD OK</span>')+'</td></tr>';
+  });
+  h+='</table><div class="small muted" style="margin-top:8px;cursor:pointer;text-decoration:underline" onclick="go(\'people\')">Full punch lists →</div></div></div>';
+  /* SCOREBOARD HEADLINES */
+  h+='<div class="ck-card"><div class="ck-head">Scoreboard headlines</div><div class="ck-body">';
+  if(!heads.items.length)h+='<div class="muted small">No actuals entered yet'+(heads.awaiting?' — '+heads.awaiting+' metric'+(heads.awaiting===1?'':'s')+' ready for data':'')+'.</div>';
+  heads.items.forEach(x=>{
+    h+='<div class="headline-chip"><span><b>'+esc(x.m.kpi)+'</b> <span class="mono" style="font-size:10px;color:#8a8471">S'+esc(x.rec.num)+'</span></span>';
+    h+='<span class="h-nums">'+esc(x.m.baseline)+' → <b>'+esc(x.actual)+'</b> / '+esc(x.m.target)+' '+esc(x.m.unit||'')+'</span><span class="chip '+x.cls+'">'+x.lbl+'</span></div>';
+  });
+  if(heads.items.length&&heads.awaiting)h+='<div class="small muted" style="margin-top:8px">'+heads.awaiting+' more metric'+(heads.awaiting===1?'':'s')+' awaiting data.</div>';
+  h+='<div class="small muted" style="margin-top:8px;cursor:pointer;text-decoration:underline" onclick="go(\'score\')">Full scoreboard →</div></div></div>';
+  /* PHASES */
+  h+='<div class="ck-card"><div class="ck-head">Phases</div><div class="ck-body">';
+  D.phases.forEach(p=>{
+    const rs=D.recommendations.filter(r=>r.phase===p.id);
+    const t=rs.reduce((a,r)=>a+r.steps.length,0),d=rs.reduce((a,r)=>a+r.steps.filter(s=>isDone(r.id,s.id)).length,0);
+    const ppct=t?Math.round(100*d/t):0;
+    const state=p.endWeek<CW?'ELAPSED':p.startWeek<=CW?'ACTIVE':'AHEAD';
+    h+='<div class="ck-item"><span class="mono small">'+esc(p.name)+' · '+state+'</span> <span class="progress-track" style="width:150px;margin-left:10px"><span class="progress-fill" style="width:'+ppct+'%"></span></span><span class="pct">'+ppct+'%</span><div class="small muted">'+esc(p.theme||'')+'</div></div>';
+  });
+  h+='<div class="small muted" style="margin-top:8px;cursor:pointer;text-decoration:underline" onclick="go(\'timeline\')">Full timeline →</div></div></div>';
+  h+='</div>';
+  h+='<div class="foot">Everything above is computed from the plan plus your checkboxes, gate calls, and scoreboard entries — nothing is typed into this page. Save a progress file from Check-in before your session with Junto.</div>';
+  h+='</div></div>';
+  return h;
+}
+
+/* ---------- router + actions ---------- */
+function render(){
+  renderNav();
+  root.innerHTML = curView==='dash'?renderDash()
+    : curView==='story'?renderStory()
+    : curView==='plan'?(curSheet?renderSheet(curSheet):renderPlan())
+    : curView==='people'?renderPeople()
+    : curView==='timeline'?renderTimeline()
+    : curView==='score'?renderScore()
+    : renderCheckin();
+}
+window.go=function(v){curView=v;if(v!=='plan')curSheet=null;else curSheet=null;render();window.scrollTo({top:0});};
+window.goSheet=function(id){curView='plan';curSheet=id;render();window.scrollTo({top:0});};
+window.toggleStep=function(rid,sid){
+  const k=stepKey(rid,sid);
+  if(S.steps[k]&&S.steps[k].done)delete S.steps[k];else S.steps[k]={done:true,at:Date.now()};
+  save();render();
+};
+window.setGate=function(gid,st){S.gates[gid]={status:st,at:Date.now()};save();render();};
+window.setMetric=function(mid,val){S.metrics[mid]={actual:val===''?null:parseFloat(val),at:Date.now()};save();render();};
+window.setNote=function(rid,val){S.notes[rid]=val;save();};
+window.exportState=function(){
+  S.lastExport=Date.now();save();
+  const payload={slug:D.meta.slug,client:D.meta.client,exportedAt:new Date().toISOString(),state:S};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='junto-progress-'+(D.meta.slug||'client')+'-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();URL.revokeObjectURL(a.href);render();
+};
+window.importState=function(input){
+  const f=input.files&&input.files[0];if(!f)return;
+  const rd=new FileReader();
+  rd.onload=()=>{try{
+    const p=JSON.parse(rd.result);
+    if(p.slug&&p.slug!==D.meta.slug&&!confirm('This progress file is for "'+p.slug+'" — load anyway?'))return;
+    S=Object.assign({steps:{},gates:{},metrics:{},notes:{},lastExport:null},p.state||{});
+    save();render();
+  }catch(e){alert('Could not read that file.');}};
+  rd.readAsText(f);
+  input.value='';
+};
+window.printPerson=function(pid){
+  curView='people';render();
+  document.body.classList.add('print-person');
+  const card=document.getElementById('pc-'+pid);
+  if(card)card.classList.add('print-target');
+  const clean=()=>{document.body.classList.remove('print-person');if(card)card.classList.remove('print-target');window.removeEventListener('afterprint',clean);};
+  window.addEventListener('afterprint',clean);
+  window.print();
+  setTimeout(clean,2000);
+};
+document.addEventListener('keydown',(ev)=>{
+  if(ev.target&&(ev.target.tagName==='TEXTAREA'||ev.target.tagName==='INPUT'))return;
+  if(ev.key==='Escape'){window.go('dash');}
+  if(curView==='plan'&&curSheet){
+    const i=recOrder.indexOf(curSheet);
+    if(ev.key==='ArrowRight'&&i<recOrder.length-1)window.goSheet(recOrder[i+1]);
+    if(ev.key==='ArrowLeft'&&i>0)window.goSheet(recOrder[i-1]);
+  }
+});
+/* first-ever open lands on the Story (delivery is a narrative moment);
+   every later open lands on the Dashboard (operating mode) */
+if(S.visited){curView='dash';}else{curView='story';S.visited=true;save();}
+render();
+})();
+</script>
+<style>#sample-ribbon{position:fixed;right:0;bottom:0;z-index:200;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7a5b16;background:rgba(194,150,59,.16);border:1px solid #C2963B;border-right:none;border-bottom:none;padding:6px 12px;pointer-events:none}@media print{#sample-ribbon{display:none}}</style><div id="sample-ribbon">Sample blueprint &middot; fictional client</div>
+</body>
+</html>
